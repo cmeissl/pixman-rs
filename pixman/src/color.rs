@@ -1,0 +1,122 @@
+use pixman_sys as ffi;
+
+#[derive(Debug, Clone, Copy)]
+#[repr(transparent)]
+pub struct Color(ffi::pixman_color_t);
+
+impl Color {
+    /// Create a [`Color`] from single components
+    ///
+    /// Note: Color component range from [`u16::MIN`] to [`u16::MAX`]
+    #[inline]
+    pub fn new(r: u16, g: u16, b: u16, a: u16) -> Self {
+        Self(ffi::pixman_color_t {
+            red: r,
+            green: g,
+            blue: b,
+            alpha: a,
+        })
+    }
+
+    #[inline]
+    pub fn from_f32(r: f32, g: f32, b: f32, a: f32) -> Self {
+        Self::from_f64(r as f64, g as f64, b as f64, a as f64)
+    }
+
+    #[inline]
+    pub fn from_f64(r: f64, g: f64, b: f64, a: f64) -> Self {
+        Self(ffi::pixman_color_t {
+            red: double_to_color(r as f64),
+            green: double_to_color(g as f64),
+            blue: double_to_color(b as f64),
+            alpha: double_to_color(a as f64),
+        })
+    }
+
+    #[inline]
+    pub fn from_u32(color8: u32) -> Self {
+        let alpha = (color8 & 0xff000000) >> 24;
+        let red = (color8 & 0x00ff0000) >> 16;
+        let green = (color8 & 0x0000ff00) >> 8;
+        let blue = (color8 & 0x000000ff) >> 0;
+
+        let alpha = alpha | alpha << 8;
+        let red = red | red << 8;
+        let green = green | green << 8;
+        let blue = blue | blue << 8;
+
+        Self::new(red as u16, green as u16, blue as u16, alpha as u16)
+    }
+
+    #[inline]
+    pub fn r(&self) -> u16 {
+        self.0.red
+    }
+
+    #[inline]
+    pub fn g(&self) -> u16 {
+        self.0.green
+    }
+
+    #[inline]
+    pub fn b(&self) -> u16 {
+        self.0.blue
+    }
+
+    #[inline]
+    pub fn a(&self) -> u16 {
+        self.0.alpha
+    }
+
+    #[inline]
+    pub(crate) fn as_ptr(&self) -> *const ffi::pixman_color_t {
+        &self.0 as *const _
+    }
+}
+
+impl From<ffi::pixman_color_t> for Color {
+    #[inline]
+    fn from(value: ffi::pixman_color_t) -> Self {
+        Self(value)
+    }
+}
+
+impl From<Color> for ffi::pixman_color_t {
+    #[inline]
+    fn from(value: Color) -> Self {
+        value.0
+    }
+}
+
+impl From<[u16; 4]> for Color {
+    #[inline]
+    fn from(value: [u16; 4]) -> Self {
+        Self::new(value[0], value[1], value[2], value[3])
+    }
+}
+
+impl From<[f32; 4]> for Color {
+    #[inline]
+    fn from(value: [f32; 4]) -> Self {
+        Self::from_f32(value[0], value[1], value[2], value[3])
+    }
+}
+
+impl From<[f64; 4]> for Color {
+    #[inline]
+    fn from(value: [f64; 4]) -> Self {
+        Self::from_f64(value[0], value[1], value[2], value[3])
+    }
+}
+
+impl From<u32> for Color {
+    #[inline]
+    fn from(value: u32) -> Self {
+        Self::from_u32(value)
+    }
+}
+
+#[inline]
+fn double_to_color(x: f64) -> u16 {
+    (((x * 65536.0) as u32) - (((x * 65536.0) as u32) >> 16)) as u16
+}

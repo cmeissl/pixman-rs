@@ -1,0 +1,14 @@
+[package]
+authors = ["Christian Meissl <meissl.christian@gmail.com>"]
+description = "Pixman is a low-level software library for pixel manipulation, providing features such as image compositing and trapezoid rasterization."
+edition = "2021"
+license = "MIT"
+name = "pixman"
+rust-version = "1.65.0"
+version = "0.1.0"
+
+[dependencies]
+pixman-sys = {version = "0.1.0", path = "../pixman-sys"}
+
+[dev-dependencies]
+image = "0.24.7"
