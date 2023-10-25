@@ -56,6 +56,7 @@ pub use vector::*;
 #[derive(Debug)]
 pub struct OperationFailed;
 
+#[allow(clippy::too_many_arguments)]
 pub fn blit(
     src_bits: &[u32],
     dst_bits: &mut [u32],
@@ -93,6 +94,7 @@ pub fn blit(
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 pub fn fill(
     bits: &mut [u32],
     stride: u32,

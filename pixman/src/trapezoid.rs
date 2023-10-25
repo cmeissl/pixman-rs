@@ -46,7 +46,6 @@ impl Trapezoid {
     }
 }
 
-
 impl From<ffi::pixman_trapezoid_t> for Trapezoid {
     #[inline]
     fn from(value: ffi::pixman_trapezoid_t) -> Self {

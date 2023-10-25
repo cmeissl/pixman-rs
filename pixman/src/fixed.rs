@@ -62,6 +62,6 @@ impl From<f32> for Fixed {
 impl From<f64> for Fixed {
     #[inline]
     fn from(value: f64) -> Self {
-        Self::from_double(value as f64)
+        Self::from_double(value)
     }
 }
