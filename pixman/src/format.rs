@@ -181,3 +181,143 @@ impl From<FormatCode> for ffi::pixman_format_code_t {
         }
     }
 }
+
+#[cfg(feature = "drm-fourcc")]
+#[derive(Debug)]
+pub struct UnsupportedDrmFourcc;
+
+#[cfg(feature = "drm-fourcc")]
+impl TryFrom<drm_fourcc::DrmFourcc> for FormatCode {
+    type Error = UnsupportedDrmFourcc;
+
+    fn try_from(value: drm_fourcc::DrmFourcc) -> Result<Self, Self::Error> {
+        use drm_fourcc::DrmFourcc;
+
+        let format = match value {
+            #[cfg(target_endian = "little")]
+            DrmFourcc::Rgb565 => FormatCode::R5G6B5,
+
+            #[cfg(target_endian = "little")]
+            DrmFourcc::Xrgb8888 => FormatCode::X8R8G8B8,
+            #[cfg(target_endian = "big")]
+            DrmFourcc::Xrgb8888 => FormatCode::B8G8R8X8,
+
+            #[cfg(target_endian = "little")]
+            DrmFourcc::Argb8888 => FormatCode::A8R8G8B8,
+            #[cfg(target_endian = "big")]
+            DrmFourcc::Argb8888 => FormatCode::B8G8R8A8,
+
+            #[cfg(target_endian = "little")]
+            DrmFourcc::Xbgr8888 => FormatCode::X8B8G8R8,
+            #[cfg(target_endian = "big")]
+            DrmFourcc::Xbgr8888 => FormatCode::R8G8B8X8,
+
+            #[cfg(target_endian = "little")]
+            DrmFourcc::Abgr8888 => FormatCode::A8B8G8R8,
+            #[cfg(target_endian = "big")]
+            DrmFourcc::Abgr8888 => FormatCode::R8G8B8A8,
+
+            #[cfg(target_endian = "little")]
+            DrmFourcc::Rgbx8888 => FormatCode::R8G8B8X8,
+            #[cfg(target_endian = "big")]
+            DrmFourcc::Rgbx8888 => FormatCode::X8B8G8R8,
+
+            #[cfg(target_endian = "little")]
+            DrmFourcc::Rgba8888 => FormatCode::R8G8B8A8,
+            #[cfg(target_endian = "big")]
+            DrmFourcc::Rgba8888 => FormatCode::A8B8G8R8,
+
+            #[cfg(target_endian = "little")]
+            DrmFourcc::Bgrx8888 => FormatCode::B8G8R8X8,
+            #[cfg(target_endian = "big")]
+            DrmFourcc::Bgrx8888 => FormatCode::X8R8G8B8,
+
+            #[cfg(target_endian = "little")]
+            DrmFourcc::Bgra8888 => FormatCode::B8G8R8A8,
+            #[cfg(target_endian = "big")]
+            DrmFourcc::Bgra8888 => FormatCode::A8R8G8B8,
+
+            #[cfg(target_endian = "little")]
+            DrmFourcc::Xrgb2101010 => FormatCode::X2R10G10B10,
+
+            #[cfg(target_endian = "little")]
+            DrmFourcc::Argb2101010 => FormatCode::A2R10G10B10,
+
+            #[cfg(target_endian = "little")]
+            DrmFourcc::Xbgr2101010 => FormatCode::X2B10G10R10,
+
+            #[cfg(target_endian = "little")]
+            DrmFourcc::Abgr2101010 => FormatCode::A2B10G10R10,
+            _ => return Err(UnsupportedDrmFourcc),
+        };
+        Ok(format)
+    }
+}
+
+#[cfg(feature = "drm-fourcc")]
+impl TryFrom<FormatCode> for drm_fourcc::DrmFourcc {
+    type Error = UnsupportedDrmFourcc;
+
+    fn try_from(value: FormatCode) -> Result<Self, Self::Error> {
+        use drm_fourcc::DrmFourcc;
+
+        let format = match value {
+            #[cfg(target_endian = "little")]
+            FormatCode::R5G6B5 => DrmFourcc::Rgb565,
+
+            #[cfg(target_endian = "little")]
+            FormatCode::X8R8G8B8 => DrmFourcc::Xrgb8888,
+            #[cfg(target_endian = "big")]
+            FormatCode::B8G8R8X8 => DrmFourcc::Xrgb8888,
+
+            #[cfg(target_endian = "little")]
+            FormatCode::A8R8G8B8 => DrmFourcc::Argb8888,
+            #[cfg(target_endian = "big")]
+            FormatCode::B8G8R8A8 => DrmFourcc::Argb8888,
+
+            #[cfg(target_endian = "little")]
+            FormatCode::X8B8G8R8 => DrmFourcc::Xbgr8888,
+            #[cfg(target_endian = "big")]
+            FormatCode::R8G8B8X8 => DrmFourcc::Xbgr8888,
+
+            #[cfg(target_endian = "little")]
+            FormatCode::A8B8G8R8 => DrmFourcc::Abgr8888,
+            #[cfg(target_endian = "big")]
+            FormatCode::R8G8B8A8 => DrmFourcc::Abgr8888,
+
+            #[cfg(target_endian = "little")]
+            FormatCode::R8G8B8X8 => DrmFourcc::Rgbx8888,
+            #[cfg(target_endian = "big")]
+            FormatCode::X8B8G8R8 => DrmFourcc::Rgbx8888,
+
+            #[cfg(target_endian = "little")]
+            FormatCode::R8G8B8A8 => DrmFourcc::Rgba8888,
+            #[cfg(target_endian = "big")]
+            FormatCode::A8B8G8R8 => DrmFourcc::Rgba8888,
+
+            #[cfg(target_endian = "little")]
+            FormatCode::B8G8R8X8 => DrmFourcc::Bgrx8888,
+            #[cfg(target_endian = "big")]
+            FormatCode::X8R8G8B8 => DrmFourcc::Bgrx8888,
+
+            #[cfg(target_endian = "little")]
+            FormatCode::B8G8R8A8 => DrmFourcc::Bgra8888,
+            #[cfg(target_endian = "big")]
+            FormatCode::A8R8G8B8 => DrmFourcc::Bgra8888,
+
+            #[cfg(target_endian = "little")]
+            FormatCode::X2R10G10B10 => DrmFourcc::Xrgb2101010,
+
+            #[cfg(target_endian = "little")]
+            FormatCode::A2R10G10B10 => DrmFourcc::Argb2101010,
+
+            #[cfg(target_endian = "little")]
+            FormatCode::X2B10G10R10 => DrmFourcc::Xbgr2101010,
+
+            #[cfg(target_endian = "little")]
+            FormatCode::A2B10G10R10 => DrmFourcc::Abgr2101010,
+            _ => return Err(UnsupportedDrmFourcc),
+        };
+        Ok(format)
+    }
+}
