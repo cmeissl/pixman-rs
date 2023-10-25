@@ -1,3 +1,5 @@
+#![cfg_attr(docsrs, feature(doc_auto_cfg))]
+
 use std::os::raw::c_int;
 
 pub use pixman_sys as ffi;
