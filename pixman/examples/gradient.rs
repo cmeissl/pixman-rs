@@ -1,4 +1,6 @@
-use pixman::{Fixed, FormatCode, GradientStop, Image, Operation, Point, Repeat, Transform};
+use pixman::{
+    Fixed, FormatCode, GradientStop, Image, LinearGradient, Operation, Point, Repeat, Transform,
+};
 
 const WIDTH: usize = 400;
 const HEIGHT: usize = 200;
@@ -19,7 +21,7 @@ pub fn main() {
     ]);
 
     let mut dest = [0xff00ff00u32; WIDTH * HEIGHT];
-    let mut dest_img = Image::from_bits(
+    let dest_img = Image::from_slice_mut(
         FormatCode::A8R8G8B8,
         WIDTH,
         HEIGHT,
@@ -29,7 +31,7 @@ pub fn main() {
     )
     .unwrap();
 
-    let mut src_img = Image::linear_gradient(p1, p2, &stops).unwrap();
+    let src_img = LinearGradient::new(p1, p2, &stops).unwrap();
 
     src_img.set_transform(transform).unwrap();
     src_img.set_repeat(Repeat::None);
@@ -48,7 +50,7 @@ pub fn main() {
         HEIGHT as u16,
     );
 
-    let mut out_img = Image::new(
+    let out_img = Image::new(
         FormatCode::A8B8G8R8,
         dest_img.width(),
         dest_img.height(),
