@@ -1,4 +1,4 @@
-use pixman::{Color, FormatCode, Image, Operation, Triangle};
+use pixman::{Color, FormatCode, Image, Operation, Solid, Triangle};
 
 const WIDTH: usize = 200;
 const HEIGHT: usize = 200;
@@ -18,8 +18,8 @@ pub fn main() {
         bits[i] = ((i / HEIGHT) as u32) * 0x01010000;
     }
 
-    let src_img = Image::solid_fill(color).unwrap();
-    let mut dest_img = Image::from_bits(
+    let src_img = Solid::new(color).unwrap();
+    let dest_img = Image::from_slice_mut(
         FormatCode::A8R8G8B8,
         WIDTH,
         HEIGHT,
@@ -40,7 +40,7 @@ pub fn main() {
         &tris,
     );
 
-    let mut out_img = Image::new(
+    let out_img = Image::new(
         FormatCode::A8B8G8R8,
         dest_img.width(),
         dest_img.height(),

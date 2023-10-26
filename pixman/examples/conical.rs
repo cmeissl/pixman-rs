@@ -1,4 +1,6 @@
-use pixman::{FormatCode, GradientStop, Image, Operation, Repeat, Transform};
+use pixman::{
+    ConicalGradient, FormatCode, GradientStop, Image, Operation, Repeat, Solid, Transform,
+};
 
 const SIZE: usize = 128;
 const GRADIENTS_PER_ROW: usize = 7;
@@ -24,7 +26,7 @@ pub fn main() {
         let column = i % GRADIENTS_PER_ROW;
         let row = i / GRADIENTS_PER_ROW;
 
-        let mut src_img = create_conical(i);
+        let src_img = create_conical(i);
         src_img.set_repeat(Repeat::Normal);
         src_img.set_transform(transform).unwrap();
 
@@ -43,7 +45,7 @@ pub fn main() {
         );
     }
 
-    let mut out_img = Image::new(
+    let out_img = Image::new(
         FormatCode::A8B8G8R8,
         dest_img.width(),
         dest_img.height(),
@@ -76,9 +78,9 @@ pub fn main() {
         .unwrap();
 }
 
-fn create_conical(index: usize) -> Image<'static> {
+fn create_conical(index: usize) -> ConicalGradient<'static> {
     let angle = (0.5 / NUM_GRADIENTS as f64 + index as f64 / NUM_GRADIENTS as f64) * 720.0 - 180.0;
-    Image::conical_gradient(
+    ConicalGradient::new(
         (0.0, 0.0),
         angle,
         &[
@@ -91,9 +93,9 @@ fn create_conical(index: usize) -> Image<'static> {
     .unwrap()
 }
 
-fn draw_checkerboard(image: &mut Image, check_size: usize, color1: u32, color2: u32) {
-    let c1 = Image::solid_fill(color1).unwrap();
-    let c2 = Image::solid_fill(color2).unwrap();
+fn draw_checkerboard(image: &Image<'_, '_, true>, check_size: usize, color1: u32, color2: u32) {
+    let c1 = Solid::new(color1).unwrap();
+    let c2 = Solid::new(color2).unwrap();
 
     let n_checks_x = (image.width() + check_size - 1) / check_size;
     let n_checks_y = (image.height() + check_size - 1) / check_size;

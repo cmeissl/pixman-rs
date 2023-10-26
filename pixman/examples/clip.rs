@@ -1,5 +1,6 @@
 use pixman::{
-    Fixed, FormatCode, GradientStop, Image, Operation, Point, Region32, Repeat, Transform,
+    Fixed, FormatCode, GradientStop, Image, Operation, Point, RadialGradient, Region32, Repeat,
+    Transform,
 };
 
 const WIDTH: usize = 200;
@@ -19,7 +20,7 @@ pub fn main() {
     let r_outer = Fixed::from(100.0);
 
     let mut src = [0xff0000ffu32; WIDTH * HEIGHT];
-    let mut src_img = Image::from_bits(
+    let src_img = Image::from_slice_mut(
         FormatCode::A8R8G8B8,
         WIDTH,
         HEIGHT,
@@ -29,7 +30,7 @@ pub fn main() {
     )
     .unwrap();
 
-    let gradient_img = Image::radial_gradient(c_inner, c_outer, r_inner, r_outer, &stops).unwrap();
+    let gradient_img = RadialGradient::new(c_inner, c_outer, r_inner, r_outer, &stops).unwrap();
 
     src_img.composite(
         Operation::Over,
@@ -53,7 +54,7 @@ pub fn main() {
     src_img.set_repeat(Repeat::Normal);
 
     let mut dst = [0xffff0000u32; WIDTH * HEIGHT];
-    let mut dst_img = Image::from_bits(
+    let dst_img = Image::from_slice_mut(
         FormatCode::A8R8G8B8,
         WIDTH,
         HEIGHT,
@@ -77,7 +78,7 @@ pub fn main() {
         HEIGHT as u16,
     );
 
-    let mut out_img = Image::new(
+    let out_img = Image::new(
         FormatCode::A8B8G8R8,
         dst_img.width(),
         dst_img.height(),

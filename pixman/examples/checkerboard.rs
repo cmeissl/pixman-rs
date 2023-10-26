@@ -1,12 +1,12 @@
-use pixman::{Color, Filter, FormatCode, Image, Operation, Repeat};
+use pixman::{Color, Filter, FormatCode, Image, Operation, Repeat, Solid};
 
 const WIDTH: usize = 400;
 const HEIGHT: usize = 400;
 const TILE_SIZE: usize = 25;
 
 pub fn main() {
-    let mut checkerboard = Image::new(FormatCode::A8R8G8B8, WIDTH, HEIGHT, false).unwrap();
-    let mut destination = Image::new(FormatCode::A8R8G8B8, WIDTH, HEIGHT, false).unwrap();
+    let checkerboard = Image::new(FormatCode::A8R8G8B8, WIDTH, HEIGHT, false).unwrap();
+    let destination = Image::new(FormatCode::A8R8G8B8, WIDTH, HEIGHT, false).unwrap();
 
     // let transform = Transform::new([
     //     [-1.96830, -1.82250, 512.12250],
@@ -28,7 +28,7 @@ pub fn main() {
 
             let c = if (j & 1) != (i & 1) { black } else { white };
 
-            let fill = Image::solid_fill(c).unwrap();
+            let fill = Solid::new(c).unwrap();
 
             checkerboard.composite(
                 Operation::Src,
@@ -65,7 +65,7 @@ pub fn main() {
         HEIGHT as u16,
     );
 
-    let mut out_img = Image::new(
+    let out_img = Image::new(
         FormatCode::A8B8G8R8,
         destination.width(),
         destination.height(),
