@@ -18,6 +18,7 @@ pub use linear_gradient::LinearGradient;
 pub use radial_gradient::RadialGradient;
 pub use solid::Solid;
 
+#[derive(Debug)]
 pub struct ImageRef(*mut ffi::pixman_image_t);
 
 impl ImageRef {
@@ -149,6 +150,7 @@ impl Drop for ImageRef {
 
 macro_rules! image_type {
     ($name:ident) => {
+        #[derive(Debug)]
         pub struct $name<'alpha> {
             image: $crate::ImageRef,
             _phantom: std::marker::PhantomData<&'alpha ()>,
