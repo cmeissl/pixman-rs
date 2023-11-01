@@ -267,7 +267,9 @@ impl<T: Into<Fixed> + Copy> From<[[T; 3]; 3]> for Transform {
     }
 }
 
+#[derive(Debug)]
 pub struct TransformError;
+
 impl TryFrom<FTransform> for Transform {
     type Error = TransformError;
 
