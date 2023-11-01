@@ -49,10 +49,7 @@ impl ImageRef {
         } else {
             std::ptr::null()
         };
-        let res = unsafe {
-            // FIXME: pixman_image_set_clip_region takes a *const region, but bindgen generates *mut region
-            ffi::pixman_image_set_clip_region(self.0, region as *mut _)
-        };
+        let res = unsafe { ffi::pixman_image_set_clip_region(self.0, region) };
         if res == 1 {
             Ok(())
         } else {
@@ -66,10 +63,7 @@ impl ImageRef {
         } else {
             std::ptr::null()
         };
-        let res = unsafe {
-            // FIXME: pixman_image_set_clip_region32 takes a *const region, but bindgen generates *mut region
-            ffi::pixman_image_set_clip_region32(self.0, region as *mut _)
-        };
+        let res = unsafe { ffi::pixman_image_set_clip_region32(self.0, region) };
         if res == 1 {
             Ok(())
         } else {
