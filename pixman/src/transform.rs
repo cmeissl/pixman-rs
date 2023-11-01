@@ -1,5 +1,7 @@
 use std::mem::MaybeUninit;
 
+use thiserror::Error;
+
 use crate::{ffi, Box16, FTransform, Fixed, Vector};
 
 #[derive(Debug, Clone, Copy)]
@@ -267,7 +269,8 @@ impl<T: Into<Fixed> + Copy> From<[[T; 3]; 3]> for Transform {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Error)]
+#[error("Failed to init Transform from FTransform")]
 pub struct TransformError;
 
 impl TryFrom<FTransform> for Transform {

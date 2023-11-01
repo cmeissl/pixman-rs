@@ -1,4 +1,5 @@
 use pixman_sys as ffi;
+use thiserror::Error;
 
 #[derive(Debug, Clone, Copy)]
 pub enum Dither {
@@ -10,7 +11,8 @@ pub enum Dither {
     OrderedBlueNoise64,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Error)]
+#[error("Unknown dither {0}")]
 pub struct UnknownDither(ffi::pixman_dither_t);
 
 impl TryFrom<ffi::pixman_dither_t> for Dither {

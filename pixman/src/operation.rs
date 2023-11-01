@@ -1,4 +1,5 @@
 use pixman_sys as ffi;
+use thiserror::Error;
 
 #[derive(Debug, Clone, Copy)]
 pub enum Operation {
@@ -57,7 +58,8 @@ pub enum Operation {
     HslLuminosity,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Error)]
+#[error("Unknown operation {0}")]
 pub struct UnknownOperation(ffi::pixman_op_t);
 
 impl TryFrom<ffi::pixman_op_t> for Operation {

@@ -1,4 +1,5 @@
 use pixman_sys as ffi;
+use thiserror::Error;
 
 #[derive(Debug, Clone, Copy)]
 pub enum Repeat {
@@ -8,7 +9,8 @@ pub enum Repeat {
     Reflect,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Error)]
+#[error("Unknown repeat {0}")]
 pub struct UnknownRepeat(ffi::pixman_repeat_t);
 
 impl TryFrom<ffi::pixman_repeat_t> for Repeat {
