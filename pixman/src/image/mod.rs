@@ -1,6 +1,7 @@
 use std::os::raw::c_int;
 
 use pixman_sys as ffi;
+use thiserror::Error;
 
 use crate::{
     repeat::Repeat, Dither, Filter, Fixed, OperationFailed, Region16, Region32, Transform,
@@ -17,6 +18,10 @@ pub use conical_gradient::ConicalGradient;
 pub use linear_gradient::LinearGradient;
 pub use radial_gradient::RadialGradient;
 pub use solid::Solid;
+
+#[derive(Debug, Error)]
+#[error("Create failed")]
+pub struct CreateFailed;
 
 #[derive(Debug)]
 pub struct ImageRef(*mut ffi::pixman_image_t);
@@ -213,6 +218,3 @@ macro_rules! image_type {
 }
 
 pub(crate) use image_type;
-
-#[derive(Debug)]
-pub struct CreateFailed;

@@ -1,4 +1,5 @@
 use pixman_sys as ffi;
+use thiserror::Error;
 
 #[derive(Debug, Clone, Copy)]
 pub enum Filter {
@@ -11,7 +12,8 @@ pub enum Filter {
     SeparableConvolution,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Error)]
+#[error("Unknown filter {0}")]
 pub struct UnknownFilter(ffi::pixman_dither_t);
 
 impl TryFrom<ffi::pixman_dither_t> for Filter {
