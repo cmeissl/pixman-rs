@@ -43,6 +43,15 @@ impl ImageRef {
         }
     }
 
+    pub fn clear_transform(&self) -> Result<(), OperationFailed> {
+        let res = unsafe { ffi::pixman_image_set_transform(self.0, std::ptr::null()) };
+        if res == 1 {
+            Ok(())
+        } else {
+            Err(OperationFailed)
+        }
+    }
+
     pub fn set_clip_region(&self, region: Option<Region16>) -> Result<(), OperationFailed> {
         let region = if let Some(region) = region {
             region.as_ptr()
