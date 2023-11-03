@@ -52,7 +52,7 @@ impl ImageRef {
         }
     }
 
-    pub fn set_clip_region(&self, region: Option<Region16>) -> Result<(), OperationFailed> {
+    pub fn set_clip_region(&self, region: Option<&Region16>) -> Result<(), OperationFailed> {
         let region = if let Some(region) = region {
             region.as_ptr()
         } else {
@@ -66,7 +66,7 @@ impl ImageRef {
         }
     }
 
-    pub fn set_clip_region32(&self, region: Option<Region32>) -> Result<(), OperationFailed> {
+    pub fn set_clip_region32(&self, region: Option<&Region32>) -> Result<(), OperationFailed> {
         let region = if let Some(region) = region {
             region.as_ptr()
         } else {
