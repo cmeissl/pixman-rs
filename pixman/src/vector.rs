@@ -16,6 +16,18 @@ impl Vector {
         })
     }
 
+    pub fn x(&self) -> Fixed {
+        Fixed::from_raw(self.0.vector[0])
+    }
+
+    pub fn y(&self) -> Fixed {
+        Fixed::from_raw(self.0.vector[1])
+    }
+
+    pub fn z(&self) -> Fixed {
+        Fixed::from_raw(self.0.vector[2])
+    }
+
     #[inline]
     pub(crate) fn as_mut_ptr(&mut self) -> *mut ffi::pixman_vector_t {
         &mut self.0 as *mut ffi::pixman_vector_t
