@@ -47,7 +47,7 @@ pub fn main() {
     );
 
     let clip_region = Region32::init_rect(50, 0, 100, 200);
-    src_img.set_clip_region32(Some(clip_region)).unwrap();
+    src_img.set_clip_region32(Some(&clip_region)).unwrap();
     src_img.set_source_clipping(true);
     src_img.set_has_client_clip(true);
     src_img.set_transform(trans).unwrap();
