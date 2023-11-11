@@ -43,8 +43,15 @@ pub fn main() {
     .unwrap();
 
     let mut src = [0xffff0000; WIDTH * HEIGHT];
-    let src_img =
-        Image::from_slice(FormatCode::A8R8G8B8, WIDTH, HEIGHT, &mut src, WIDTH * 4).unwrap();
+    let src_img = Image::from_slice_mut(
+        FormatCode::A8R8G8B8,
+        WIDTH,
+        HEIGHT,
+        &mut src,
+        WIDTH * 4,
+        false,
+    )
+    .unwrap();
 
     let grad_img = LinearGradient::new(p1, p2, &stops).unwrap();
     grad_img.set_transform(transform).unwrap();
@@ -101,11 +108,16 @@ pub fn main() {
         dest_img.height() as u16,
     );
 
-    let out_data = out_img.data().unwrap();
+    let out_data = out_img.data();
     let image_buffer = image::ImageBuffer::<image::Rgba<u8>, _>::from_raw(
         out_img.width() as u32,
         out_img.height() as u32,
-        out_data,
+        unsafe {
+            std::slice::from_raw_parts(
+                out_data.as_ptr() as *const _,
+                out_data.len() * std::mem::size_of::<u32>(),
+            )
+        },
     )
     .unwrap();
     image_buffer

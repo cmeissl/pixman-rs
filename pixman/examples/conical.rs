@@ -66,11 +66,16 @@ pub fn main() {
         dest_img.height() as u16,
     );
 
-    let out_data = out_img.data().unwrap();
+    let out_data = out_img.data();
     let image_buffer = image::ImageBuffer::<image::Rgba<u8>, _>::from_raw(
         out_img.width() as u32,
         out_img.height() as u32,
-        out_data,
+        unsafe {
+            std::slice::from_raw_parts(
+                out_data.as_ptr() as *const _,
+                out_data.len() * std::mem::size_of::<u32>(),
+            )
+        },
     )
     .unwrap();
     image_buffer
@@ -93,7 +98,7 @@ fn create_conical(index: usize) -> ConicalGradient<'static> {
     .unwrap()
 }
 
-fn draw_checkerboard(image: &Image<'_, '_, true>, check_size: usize, color1: u32, color2: u32) {
+fn draw_checkerboard(image: &Image<'_, '_>, check_size: usize, color1: u32, color2: u32) {
     let c1 = Solid::new(color1).unwrap();
     let c2 = Solid::new(color2).unwrap();
 

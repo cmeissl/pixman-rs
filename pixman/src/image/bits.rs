@@ -6,13 +6,13 @@ use crate::{
 };
 
 #[derive(Debug)]
-pub struct Image<'bits, 'alpha, const WRITABLE: bool> {
+pub struct Image<'bits, 'alpha> {
     image: ImageRef,
     _bits: PhantomData<&'bits ()>,
     _alpha: PhantomData<&'alpha ()>,
 }
 
-impl<'bits, 'alpha, const WRITABLE: bool> Image<'bits, 'alpha, WRITABLE> {
+impl<'bits, 'alpha> Image<'bits, 'alpha> {
     pub unsafe fn from_ptr(ptr: *mut ffi::pixman_image_t) -> Self {
         Self {
             image: unsafe { ImageRef::from_ptr(ptr) },
@@ -22,7 +22,7 @@ impl<'bits, 'alpha, const WRITABLE: bool> Image<'bits, 'alpha, WRITABLE> {
     }
 }
 
-impl<'bits, 'alpha, const WRITABLE: bool> std::ops::Deref for Image<'bits, 'alpha, WRITABLE> {
+impl<'bits, 'alpha> std::ops::Deref for Image<'bits, 'alpha> {
     type Target = ImageRef;
 
     fn deref(&self) -> &Self::Target {
@@ -30,56 +30,13 @@ impl<'bits, 'alpha, const WRITABLE: bool> std::ops::Deref for Image<'bits, 'alph
     }
 }
 
-impl<'bits, 'alpha, const WRITABLE: bool> Image<'bits, 'alpha, WRITABLE> {
-    pub fn width(&self) -> usize {
-        unsafe { ffi::pixman_image_get_width(self.as_ptr()) as usize }
-    }
-
-    pub fn height(&self) -> usize {
-        unsafe { ffi::pixman_image_get_height(self.as_ptr()) as usize }
-    }
-
-    pub fn stride(&self) -> usize {
-        unsafe { ffi::pixman_image_get_stride(self.as_ptr()) as usize }
-    }
-
-    pub fn depth(&self) -> usize {
-        unsafe { ffi::pixman_image_get_depth(self.as_ptr()) as usize }
-    }
-
-    pub fn format(&self) -> Option<FormatCode> {
-        let format = unsafe { ffi::pixman_image_get_format(self.as_ptr()) };
-        FormatCode::try_from(format).ok()
-    }
-
-    /// Access the underlying pixel data
-    ///
-    /// Returns `None` in case the image has no underlying pixel data, e.g. solid/gradient/...
-    pub fn data(&self) -> Option<&[u8]> {
-        let height = self.height();
-        let stride = self.stride();
-        let ptr = unsafe { ffi::pixman_image_get_data(self.as_ptr()) };
-
-        if ptr.is_null() {
-            None
-        } else {
-            unsafe {
-                Some(std::slice::from_raw_parts(
-                    ptr as *const u8,
-                    stride * height,
-                ))
-            }
-        }
-    }
-}
-
-impl<'bits, 'a, const W: bool> Image<'bits, 'a, W> {
-    pub fn set_alpha_map<'alpha: 'a, const WRITABLE: bool>(
+impl<'bits, 'a> Image<'bits, 'a> {
+    pub fn set_alpha_map<'alpha: 'a>(
         self,
-        alpha_map: &'alpha Image<'_, 'static, WRITABLE>,
+        alpha_map: &'alpha Image<'_, 'static>,
         x: i16,
         y: i16,
-    ) -> Image<'bits, 'alpha, W> {
+    ) -> Image<'bits, 'alpha> {
         unsafe {
             ffi::pixman_image_set_alpha_map(self.as_ptr(), alpha_map.as_ptr(), x, y);
         }
@@ -90,7 +47,7 @@ impl<'bits, 'a, const W: bool> Image<'bits, 'a, W> {
         }
     }
 
-    pub fn clear_alpha_map(self) -> Image<'bits, 'static, W> {
+    pub fn clear_alpha_map(self) -> Image<'bits, 'static> {
         unsafe {
             ffi::pixman_image_set_alpha_map(self.as_ptr(), std::ptr::null_mut(), 0, 0);
         }
@@ -102,43 +59,7 @@ impl<'bits, 'a, const W: bool> Image<'bits, 'a, W> {
     }
 }
 
-impl<'bits> Image<'bits, 'static, false> {
-    pub fn from_slice(
-        format: FormatCode,
-        width: usize,
-        height: usize,
-        bits: &'bits [u32],
-        rowstride_bytes: usize,
-    ) -> Result<Self, CreateFailed> {
-        unsafe { Self::from_raw(format, width, height, bits.as_ptr(), rowstride_bytes) }
-    }
-
-    pub unsafe fn from_raw(
-        format: FormatCode,
-        width: usize,
-        height: usize,
-        bits: *const u32,
-        rowstride_bytes: usize,
-    ) -> Result<Self, CreateFailed> {
-        let ptr = unsafe {
-            ffi::pixman_image_create_bits_no_clear(
-                format.into(),
-                width as c_int,
-                height as c_int,
-                bits as *mut _,
-                rowstride_bytes as c_int,
-            )
-        };
-
-        if ptr.is_null() {
-            Err(CreateFailed)
-        } else {
-            Ok(unsafe { Self::from_ptr(ptr) })
-        }
-    }
-}
-
-impl Image<'static, 'static, true> {
+impl Image<'static, 'static> {
     pub fn new(
         format: FormatCode,
         width: usize,
@@ -175,7 +96,7 @@ impl Image<'static, 'static, true> {
     }
 }
 
-impl<'bits> Image<'bits, 'static, true> {
+impl<'bits> Image<'bits, 'static> {
     pub fn from_slice_mut(
         format: FormatCode,
         width: usize,
@@ -234,7 +155,40 @@ impl<'bits> Image<'bits, 'static, true> {
     }
 }
 
-impl<'bits, 'alpha> Image<'bits, 'alpha, true> {
+impl<'bits, 'alpha> Image<'bits, 'alpha> {
+    pub fn width(&self) -> usize {
+        unsafe { ffi::pixman_image_get_width(self.as_ptr()) as usize }
+    }
+
+    pub fn height(&self) -> usize {
+        unsafe { ffi::pixman_image_get_height(self.as_ptr()) as usize }
+    }
+
+    pub fn stride(&self) -> usize {
+        unsafe { ffi::pixman_image_get_stride(self.as_ptr()) as usize }
+    }
+
+    pub fn depth(&self) -> usize {
+        unsafe { ffi::pixman_image_get_depth(self.as_ptr()) as usize }
+    }
+
+    pub fn format(&self) -> Option<FormatCode> {
+        let format = unsafe { ffi::pixman_image_get_format(self.as_ptr()) };
+        FormatCode::try_from(format).ok()
+    }
+
+    /// Access the underlying pixel data
+    ///
+    /// Returns `None` in case the image has no underlying pixel data, e.g. solid/gradient/...
+    pub fn data(&self) -> &mut [u32] {
+        let height = self.height();
+        let stride = self.stride();
+        let ptr = unsafe { ffi::pixman_image_get_data(self.as_ptr()) };
+        unsafe {
+            std::slice::from_raw_parts_mut(ptr, (stride / std::mem::size_of::<u32>()) * height)
+        }
+    }
+
     pub fn fill_boxes(
         &self,
         op: Operation,
