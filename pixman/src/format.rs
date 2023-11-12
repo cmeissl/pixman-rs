@@ -1,4 +1,5 @@
 use pixman_sys as ffi;
+#[cfg(feature = "drm-fourcc")]
 use thiserror::Error;
 
 #[derive(Debug, Clone, Copy)]
@@ -63,15 +64,9 @@ impl FormatCode {
     }
 }
 
-#[derive(Debug, Error)]
-#[error("Unknown format code {0}")]
-pub struct UnknownFormatCode(ffi::pixman_format_code_t);
-
-impl TryFrom<ffi::pixman_format_code_t> for FormatCode {
-    type Error = UnknownFormatCode;
-
-    fn try_from(value: ffi::pixman_format_code_t) -> Result<Self, Self::Error> {
-        let format = match value {
+impl From<ffi::pixman_format_code_t> for FormatCode {
+    fn from(value: ffi::pixman_format_code_t) -> Self {
+        match value {
             ffi::pixman_format_code_t_PIXMAN_rgba_float => FormatCode::RgbaFloat,
             ffi::pixman_format_code_t_PIXMAN_rgb_float => FormatCode::RgbFloat,
             ffi::pixman_format_code_t_PIXMAN_a8r8g8b8 => FormatCode::A8R8G8B8,
@@ -122,9 +117,8 @@ impl TryFrom<ffi::pixman_format_code_t> for FormatCode {
             ffi::pixman_format_code_t_PIXMAN_g1 => FormatCode::G1,
             ffi::pixman_format_code_t_PIXMAN_yuy2 => FormatCode::YUY2,
             ffi::pixman_format_code_t_PIXMAN_yv12 => FormatCode::YV12,
-            _ => return Err(UnknownFormatCode(value)),
-        };
-        Ok(format)
+            _ => unreachable!(),
+        }
     }
 }
 

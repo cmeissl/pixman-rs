@@ -172,9 +172,9 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
         unsafe { ffi::pixman_image_get_depth(self.as_ptr()) as usize }
     }
 
-    pub fn format(&self) -> Option<FormatCode> {
+    pub fn format(&self) -> FormatCode {
         let format = unsafe { ffi::pixman_image_get_format(self.as_ptr()) };
-        FormatCode::try_from(format).ok()
+        FormatCode::from(format)
     }
 
     /// Access the underlying pixel data
@@ -461,25 +461,5 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
 
     pub fn rasterize_trapezoid(&self, trap: Trapezoid, x_off: i32, y_off: i32) {
         unsafe { ffi::pixman_rasterize_trapezoid(self.as_ptr(), trap.as_ptr(), x_off, y_off) }
-    }
-
-    /// Access the underlying pixel data
-    ///
-    /// Returns `None` in case the image has no underlying pixel data, e.g. solid/gradient/...
-    pub fn data_mut(&self) -> Option<&mut [u8]> {
-        let height = self.height();
-        let stride = self.stride();
-        let ptr = unsafe { ffi::pixman_image_get_data(self.as_ptr()) };
-
-        if ptr.is_null() {
-            None
-        } else {
-            unsafe {
-                Some(std::slice::from_raw_parts_mut(
-                    ptr as *mut u8,
-                    stride * height,
-                ))
-            }
-        }
     }
 }
