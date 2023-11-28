@@ -63,14 +63,13 @@ pub fn main() {
         (dest_img.width() as u16, dest_img.height() as u16),
     );
 
-    let out_data = out_img.data();
     let image_buffer = image::ImageBuffer::<image::Rgba<u8>, _>::from_raw(
         out_img.width() as u32,
         out_img.height() as u32,
         unsafe {
             std::slice::from_raw_parts(
-                out_data.as_ptr() as *const _,
-                out_data.len() * std::mem::size_of::<u32>(),
+                out_img.data() as *const u8,
+                out_img.stride() * out_img.height(),
             )
         },
     )
