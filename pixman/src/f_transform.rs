@@ -99,8 +99,6 @@ impl FTransform {
     }
 
     pub fn rotate(mut self, c: f64, s: f64, reverse: bool) -> Option<Self> {
-        let c = c;
-        let s = s;
         let res = if reverse {
             unsafe { ffi::pixman_f_transform_rotate(std::ptr::null_mut(), self.as_mut_ptr(), c, s) }
         } else {
@@ -115,8 +113,6 @@ impl FTransform {
     }
 
     pub fn scale(mut self, sx: f64, sy: f64, reverse: bool) -> Option<Self> {
-        let sx = sx;
-        let sy = sy;
         let res = if reverse {
             unsafe {
                 ffi::pixman_f_transform_scale(std::ptr::null_mut(), self.as_mut_ptr(), sx, sy)
@@ -135,8 +131,6 @@ impl FTransform {
     }
 
     pub fn translate(mut self, tx: f64, ty: f64, reverse: bool) -> Option<Self> {
-        let tx = tx;
-        let ty = ty;
         let res = if reverse {
             unsafe {
                 ffi::pixman_f_transform_translate(std::ptr::null_mut(), self.as_mut_ptr(), tx, ty)

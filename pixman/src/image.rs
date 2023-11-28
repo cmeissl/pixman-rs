@@ -384,6 +384,7 @@ impl<'bits> Image<'bits> {
         }
     }
 
+    #[allow(clippy::too_many_arguments)]
     pub fn composite(
         &mut self,
         operation: Operation,
@@ -421,6 +422,7 @@ impl<'bits> Image<'bits> {
         }
     }
 
+    #[allow(clippy::too_many_arguments)]
     pub fn composite32(
         &mut self,
         operation: Operation,
@@ -458,6 +460,7 @@ impl<'bits> Image<'bits> {
         }
     }
 
+    #[allow(clippy::too_many_arguments)]
     pub fn composite_triangles(
         &mut self,
         operation: Operation,
@@ -485,6 +488,7 @@ impl<'bits> Image<'bits> {
         }
     }
 
+    #[allow(clippy::too_many_arguments)]
     pub fn composite_trapezoids(
         &mut self,
         operation: Operation,
@@ -548,6 +552,7 @@ impl<'bits> Image<'bits> {
         }
     }
 
+    #[allow(clippy::too_many_arguments)]
     pub fn compute_composite_region(
         &self,
         src: &Image<'_>,

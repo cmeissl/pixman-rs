@@ -26,10 +26,10 @@ impl Color {
     #[inline]
     pub fn from_f64(r: f64, g: f64, b: f64, a: f64) -> Self {
         Self(ffi::pixman_color_t {
-            red: double_to_color(r as f64),
-            green: double_to_color(g as f64),
-            blue: double_to_color(b as f64),
-            alpha: double_to_color(a as f64),
+            red: double_to_color(r),
+            green: double_to_color(g),
+            blue: double_to_color(b),
+            alpha: double_to_color(a),
         })
     }
 
@@ -38,7 +38,7 @@ impl Color {
         let alpha = (color8 & 0xff000000) >> 24;
         let red = (color8 & 0x00ff0000) >> 16;
         let green = (color8 & 0x0000ff00) >> 8;
-        let blue = (color8 & 0x000000ff) >> 0;
+        let blue = color8 & 0x000000ff;
 
         let alpha = alpha | alpha << 8;
         let red = red | red << 8;
