@@ -13,6 +13,7 @@ rustdoc-args = ["--cfg", "docsrs"]
 
 [dependencies]
 drm-fourcc = {version = "2.2.0", optional = true}
+paste = "1.0.14"
 pixman-sys = {version = "0.1.0", path = "../pixman-sys"}
 thiserror = "1.0.50"
 
