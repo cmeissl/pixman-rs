@@ -179,16 +179,12 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
 
     /// Access the underlying pixel data
     ///
-    /// Returns `None` in case the image has no underlying pixel data, e.g. solid/gradient/...
-    pub fn data(&self) -> &mut [u32] {
-        let height = self.height();
-        let stride = self.stride();
-        let ptr = unsafe { ffi::pixman_image_get_data(self.as_ptr()) };
-        unsafe {
-            std::slice::from_raw_parts_mut(ptr, (stride / std::mem::size_of::<u32>()) * height)
-        }
+    /// # Safety
+    /// 
+    /// The pointer is valid for the lifetime of the image
+    pub unsafe fn data(&self) -> *mut u32 {
+        unsafe { ffi::pixman_image_get_data(self.as_ptr()) }
     }
-
     pub fn fill_boxes(
         &self,
         op: Operation,
