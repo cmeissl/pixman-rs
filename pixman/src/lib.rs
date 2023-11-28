@@ -56,7 +56,8 @@ pub use trapezoid::*;
 pub use triangle::*;
 pub use vector::*;
 
-#[derive(Debug)]
+#[derive(Debug, thiserror::Error)]
+#[error("The requested operation failed")]
 pub struct OperationFailed;
 
 #[allow(clippy::too_many_arguments)]
