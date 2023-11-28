@@ -10,9 +10,9 @@ const HEIGHT: usize = SIZE * NUM_ROWS;
 const NUM_GRADIENTS: usize = 35;
 
 pub fn main() {
-    let mut dest_img = Image::new(FormatCode::A8R8G8B8, WIDTH, HEIGHT, false).unwrap();
+    let dest_img = Image::new(FormatCode::A8R8G8B8, WIDTH, HEIGHT, false).unwrap();
 
-    draw_checkerboard(&mut dest_img, 25, 0xffaaaaaa, 0xff888888);
+    draw_checkerboard(&dest_img, 25, 0xffaaaaaa, 0xff888888);
 
     let transform = Transform::identity()
         .translate(0.5, 0.5, true)

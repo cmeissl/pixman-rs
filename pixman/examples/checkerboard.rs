@@ -22,7 +22,7 @@ pub fn main() {
             let white = Color::new(
                 (v * 0xffff as f64) as u16,
                 (u * 0xffff as f64) as u16,
-                ((1.0 - (u as f64)) * 0xffff as f64) as u16,
+                ((1.0 - u) * 0xffff as f64) as u16,
                 0xffff,
             );
 
