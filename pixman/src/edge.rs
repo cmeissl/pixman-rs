@@ -2,13 +2,15 @@ use std::{mem::MaybeUninit, os::raw::c_int};
 
 use crate::{ffi, Fixed, Line};
 
+/// Defines a single edge
 #[derive(Debug, Clone, Copy)]
 #[repr(transparent)]
 pub struct Edge(ffi::pixman_edge_t);
 
 impl Edge {
+    /// Create a edge from the provided values
     pub fn new(
-        bpp: isize,
+        bpp: i32,
         y_start: impl Into<Fixed>,
         x_top: impl Into<Fixed>,
         y_top: impl Into<Fixed>,
@@ -19,7 +21,7 @@ impl Edge {
         unsafe {
             ffi::pixman_edge_init(
                 edge.as_mut_ptr(),
-                bpp as c_int,
+                bpp,
                 y_start.into().into_raw(),
                 x_top.into().into_raw(),
                 y_top.into().into_raw(),
@@ -53,9 +55,10 @@ impl Edge {
         Self(unsafe { edge.assume_init() })
     }
 
-    pub fn step(&mut self, n: isize) {
+    /// Step an edge by any amount (including negative values)
+    pub fn step(&mut self, n: i32) {
         unsafe {
-            ffi::pixman_edge_step(&mut self.0, n as c_int);
+            ffi::pixman_edge_step(&mut self.0, n);
         }
     }
 

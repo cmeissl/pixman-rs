@@ -2,11 +2,13 @@ use pixman_sys as ffi;
 
 use crate::{Color, Fixed};
 
+/// Gradient-stop
 #[derive(Debug, Clone, Copy)]
 #[repr(transparent)]
 pub struct GradientStop(ffi::pixman_gradient_stop_t);
 
 impl GradientStop {
+    /// Initialize the gradient stop from the provided valued
     #[inline]
     pub fn new(x: impl Into<Fixed>, color: impl Into<Color>) -> Self {
         Self(ffi::pixman_gradient_stop {
@@ -15,11 +17,13 @@ impl GradientStop {
         })
     }
 
+    /// Access the stop x value
     #[inline]
     pub fn x(&self) -> Fixed {
         Fixed::from_raw(self.0.x)
     }
 
+    /// Access the stop color
     #[inline]
     pub fn color(&self) -> Color {
         Color::from(self.0.color)

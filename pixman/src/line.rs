@@ -1,10 +1,12 @@
 use crate::{ffi, Point};
 
+/// Single line
 #[derive(Debug, Clone, Copy)]
 #[repr(transparent)]
 pub struct Line(ffi::pixman_line_fixed_t);
 
 impl Line {
+    /// Initialize a line from two points
     #[inline]
     pub fn new(p1: impl Into<Point>, p2: impl Into<Point>) -> Self {
         Self(ffi::pixman_line_fixed_t {
@@ -13,11 +15,13 @@ impl Line {
         })
     }
 
+    /// Access the first point
     #[inline]
     pub fn p1(&self) -> Point {
         Point::from(self.0.p1)
     }
 
+    /// Access the second point
     #[inline]
     pub fn p2(&self) -> Point {
         Point::from(self.0.p2)

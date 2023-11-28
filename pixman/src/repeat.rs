@@ -1,14 +1,20 @@
 use pixman_sys as ffi;
 use thiserror::Error;
 
+/// Defines the possible repeat operations
 #[derive(Debug, Clone, Copy)]
 pub enum Repeat {
+    /// No repeat
     None,
+    /// Normal repeat
     Normal,
+    /// Pad repeat
     Pad,
+    /// Reflect repeat
     Reflect,
 }
 
+/// The repeat operations is unknown
 #[derive(Debug, Error)]
 #[error("Unknown repeat {0}")]
 pub struct UnknownRepeat(ffi::pixman_repeat_t);

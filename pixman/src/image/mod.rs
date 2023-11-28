@@ -19,20 +19,24 @@ pub use linear_gradient::LinearGradient;
 pub use radial_gradient::RadialGradient;
 pub use solid::Solid;
 
+/// Resource creation failed
 #[derive(Debug, Error)]
-#[error("Create failed")]
+#[error("Resource creation failed")]
 pub struct CreateFailed;
 
+/// A reference to a raw image
 #[derive(Debug)]
 pub struct ImageRef(*mut ffi::pixman_image_t);
 
 impl ImageRef {
+    /// Set the repeat operation for this image
     pub fn set_repeat(&self, repeat: Repeat) {
         unsafe {
             ffi::pixman_image_set_repeat(self.0, repeat.into());
         }
     }
 
+    /// Apply the specified transform during sampling from this image
     pub fn set_transform(&self, transform: impl Into<Transform>) -> Result<(), OperationFailed> {
         let transform = transform.into();
         let res = unsafe { ffi::pixman_image_set_transform(self.0, transform.as_ptr()) };
@@ -43,6 +47,7 @@ impl ImageRef {
         }
     }
 
+    /// Clear a previously applied transform
     pub fn clear_transform(&self) -> Result<(), OperationFailed> {
         let res = unsafe { ffi::pixman_image_set_transform(self.0, std::ptr::null()) };
         if res == 1 {
@@ -52,6 +57,7 @@ impl ImageRef {
         }
     }
 
+    /// Apply a clip region used during composition
     pub fn set_clip_region(&self, region: Option<&Region16>) -> Result<(), OperationFailed> {
         let region = if let Some(region) = region {
             region.as_ptr()
@@ -66,6 +72,7 @@ impl ImageRef {
         }
     }
 
+    /// Apply a clip region used during composition
     pub fn set_clip_region32(&self, region: Option<&Region32>) -> Result<(), OperationFailed> {
         let region = if let Some(region) = region {
             region.as_ptr()
@@ -80,16 +87,19 @@ impl ImageRef {
         }
     }
 
+    /// Set the dither operation used during composition
     pub fn set_dither(&self, dither: Dither) {
         unsafe {
             ffi::pixman_image_set_dither(self.0, dither.into());
         }
     }
 
+    /// Set the dither offset
     pub fn set_dither_offset(&self, offset_x: c_int, offset_y: c_int) {
         unsafe { ffi::pixman_image_set_dither_offset(self.0, offset_x, offset_y) }
     }
 
+    /// Set the filter operation used during composition
     pub fn set_filter(
         &self,
         filter: Filter,
@@ -110,6 +120,7 @@ impl ImageRef {
         }
     }
 
+    /// Set whether the source clip was set by a client
     pub fn set_has_client_clip(&self, client_clip: bool) {
         let client_clip = if client_clip { 1 } else { 0 };
         unsafe {
@@ -120,6 +131,7 @@ impl ImageRef {
     // TODO: pixman_image_set_indexed
     //pub fn set_indexed(&mut self)
 
+    /// Set whether the clip applies when the image is used as a source
     pub fn set_source_clipping(&self, source_clipping: bool) {
         let source_clipping = if source_clipping { 1 } else { 0 };
         unsafe {
@@ -127,10 +139,12 @@ impl ImageRef {
         }
     }
 
+    /// Whether the image has component alpha or unified alpha
     pub fn component_alpha(&self) -> bool {
         unsafe { ffi::pixman_image_get_component_alpha(self.0) == 1 }
     }
 
+    /// Set whether the image has component alpha or unified alpha
     pub fn set_component_alpha(&self, component_alpha: bool) {
         let component_alpha = if component_alpha { 1 } else { 0 };
         unsafe { ffi::pixman_image_set_component_alpha(self.0, component_alpha) }
@@ -138,11 +152,18 @@ impl ImageRef {
 }
 
 impl ImageRef {
+    /// Create a reference to a raw image
+    ///
+    /// # Safety
+    ///
+    /// The pointer is expected to be valid and have a ref-count of at least one.
+    /// Ownership of the pointer is transferred and unref will be called on drop.
     pub unsafe fn from_ptr(ptr: *mut ffi::pixman_image_t) -> Self {
         assert!(!ptr.is_null());
         ImageRef(ptr)
     }
 
+    /// Access the raw image pointer
     pub fn as_ptr(&self) -> *mut ffi::pixman_image_t {
         self.0
     }
@@ -157,14 +178,16 @@ impl Drop for ImageRef {
 }
 
 macro_rules! image_type {
-    ($name:ident) => {
-        #[derive(Debug)]
+    ($(#[$attr:meta])* $name:ident) => {
+        $(#[$attr])*
         pub struct $name<'alpha> {
             image: $crate::ImageRef,
             _phantom: std::marker::PhantomData<&'alpha ()>,
         }
 
         impl<'a> $name<'a> {
+            /// Set an alpha map that will be used when this image is
+            /// used as a src in a blit operation
             pub fn set_alpha_map<'alpha: 'a>(
                 self,
                 alpha_map: &'alpha crate::Image<'_, 'static>,
@@ -185,6 +208,7 @@ macro_rules! image_type {
                 }
             }
 
+            /// Clear a previously set alpha map
             pub fn clear_alpha_map(self) -> $name<'static> {
                 unsafe {
                     $crate::ffi::pixman_image_set_alpha_map(
@@ -202,6 +226,12 @@ macro_rules! image_type {
         }
 
         impl<'alpha> $name<'alpha> {
+            /// Initialize the image from a raw pointer
+            ///
+            /// # Safety
+            ///
+            /// The pointer is expected to be valid and have a ref-count of at least one.
+            /// Ownership of the pointer is transferred and unref will be called on drop.
             pub unsafe fn from_ptr(ptr: *mut ffi::pixman_image_t) -> Self {
                 Self {
                     image: $crate::ImageRef::from_ptr(ptr),
