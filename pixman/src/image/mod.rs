@@ -165,9 +165,9 @@ macro_rules! image_type {
         }
 
         impl<'a> $name<'a> {
-            pub fn set_alpha_map<'alpha: 'a, const WRITABLE: bool>(
+            pub fn set_alpha_map<'alpha: 'a>(
                 self,
-                alpha_map: &'alpha crate::Image<'_, 'static, WRITABLE>,
+                alpha_map: &'alpha crate::Image<'_, 'static>,
                 x: i16,
                 y: i16,
             ) -> $name<'alpha> {
