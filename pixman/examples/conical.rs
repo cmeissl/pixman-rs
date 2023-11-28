@@ -34,14 +34,10 @@ pub fn main() {
             Operation::Over,
             &src_img,
             None,
-            0,
-            0,
-            0,
-            0,
-            (column * SIZE) as i32,
-            (row * SIZE) as i32,
-            SIZE as i32,
-            SIZE as i32,
+            (0, 0),
+            (0, 0),
+            ((column * SIZE) as i32, (row * SIZE) as i32),
+            (SIZE as i32, SIZE as i32),
         );
     }
 
@@ -56,17 +52,12 @@ pub fn main() {
         Operation::Src,
         &dest_img,
         None,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        dest_img.width() as u16,
-        dest_img.height() as u16,
+        (0, 0),
+        (0, 0),
+        (0, 0),
+        (dest_img.width() as u16, dest_img.height() as u16),
     );
 
-    let out_data = out_img.data();
     let image_buffer = image::ImageBuffer::<image::Rgba<u8>, _>::from_raw(
         out_img.width() as u32,
         out_img.height() as u32,

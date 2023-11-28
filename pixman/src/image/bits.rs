@@ -241,34 +241,31 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
         operation: Operation,
         src: &ImageRef,
         mask: Option<&ImageRef>,
-        src_x: i16,
-        src_y: i16,
-        mask_x: i16,
-        mask_y: i16,
-        dest_x: i16,
-        dest_y: i16,
-        width: u16,
-        height: u16,
+        src_loc: (i16, i16),
+        mask_loc: (i16, i16),
+        dest_loc: (i16, i16),
+        size: (u16, u16),
     ) {
         let mask_ptr = if let Some(mask) = mask {
             mask.as_ptr()
         } else {
             std::ptr::null_mut()
         };
+
         unsafe {
             ffi::pixman_image_composite(
                 operation.into(),
                 src.as_ptr(),
                 mask_ptr,
                 self.as_ptr(),
-                src_x,
-                src_y,
-                mask_x,
-                mask_y,
-                dest_x,
-                dest_y,
-                width,
-                height,
+                src_loc.0,
+                src_loc.1,
+                mask_loc.0,
+                mask_loc.1,
+                dest_loc.0,
+                dest_loc.1,
+                size.0,
+                size.1,
             )
         }
     }
@@ -279,14 +276,10 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
         operation: Operation,
         src: &ImageRef,
         mask: Option<&ImageRef>,
-        src_x: i32,
-        src_y: i32,
-        mask_x: i32,
-        mask_y: i32,
-        dest_x: i32,
-        dest_y: i32,
-        width: i32,
-        height: i32,
+        src_loc: (i32, i32),
+        mask_loc: (i32, i32),
+        dest_loc: (i32, i32),
+        size: (i32, i32),
     ) {
         let mask_ptr = if let Some(mask) = mask {
             mask.as_ptr()
@@ -299,14 +292,14 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
                 src.as_ptr(),
                 mask_ptr,
                 self.as_ptr(),
-                src_x,
-                src_y,
-                mask_x,
-                mask_y,
-                dest_x,
-                dest_y,
-                width,
-                height,
+                src_loc.0,
+                src_loc.1,
+                mask_loc.0,
+                mask_loc.1,
+                dest_loc.0,
+                dest_loc.1,
+                size.0,
+                size.1,
             )
         }
     }
@@ -317,10 +310,8 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
         operation: Operation,
         src: &ImageRef,
         mask_format: FormatCode,
-        x_src: isize,
-        y_src: isize,
-        x_dst: isize,
-        y_dst: isize,
+        src_loc: (i32, i32),
+        dest_loc: (i32, i32),
         tris: &[Triangle],
     ) {
         unsafe {
@@ -329,12 +320,12 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
                 src.as_ptr(),
                 self.as_ptr(),
                 mask_format.into(),
-                x_src as i32,
-                y_src as i32,
-                x_dst as i32,
-                y_dst as i32,
+                src_loc.0,
+                src_loc.1,
+                dest_loc.0,
+                dest_loc.1,
                 tris.len() as i32,
-                tris.as_ptr() as *const _,
+                tris.as_ptr() as *const ffi::pixman_triangle_t,
             );
         }
     }
@@ -345,10 +336,8 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
         operation: Operation,
         src: &ImageRef,
         mask_format: FormatCode,
-        x_src: isize,
-        y_src: isize,
-        x_dst: isize,
-        y_dst: isize,
+        src_loc: (i32, i32),
+        dest_loc: (i32, i32),
         traps: &[Trapezoid],
     ) {
         unsafe {
@@ -357,46 +346,46 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
                 src.as_ptr(),
                 self.as_ptr(),
                 mask_format.into(),
-                x_src as i32,
-                y_src as i32,
-                x_dst as i32,
-                y_dst as i32,
+                src_loc.0,
+                src_loc.1,
+                dest_loc.0,
+                dest_loc.1,
                 traps.len() as i32,
-                traps.as_ptr() as *const _,
+                traps.as_ptr() as *const ffi::pixman_trapezoid_t,
             );
         }
     }
 
-    pub fn add_traps(&self, x_off: i16, y_off: i16, traps: &[Trap]) {
+    pub fn add_traps(&self, offset: (i16, i16), traps: &[Trap]) {
         unsafe {
             ffi::pixman_add_traps(
                 self.as_ptr(),
-                x_off,
-                y_off,
+                offset.0,
+                offset.1,
                 traps.len() as i32,
-                traps.as_ptr() as *const _,
+                traps.as_ptr() as *const ffi::pixman_trap_t,
             );
         }
     }
 
-    pub fn add_trapezoids(&self, x_off: i16, y_off: i32, traps: &[Trapezoid]) {
+    pub fn add_trapezoids(&self, offset: (i16, i32), traps: &[Trapezoid]) {
         unsafe {
             ffi::pixman_add_trapezoids(
                 self.as_ptr(),
-                x_off,
-                y_off,
+                offset.0,
+                offset.1,
                 traps.len() as i32,
                 traps.as_ptr() as *const _,
             );
         }
     }
 
-    pub fn add_triangles(&self, x_off: i32, y_off: i32, tris: &[Triangle]) {
+    pub fn add_triangles(&self, offset: (i32, i32), tris: &[Triangle]) {
         unsafe {
             ffi::pixman_add_triangles(
                 self.as_ptr(),
-                x_off,
-                y_off,
+                offset.0,
+                offset.1,
                 tris.len() as i32,
                 tris.as_ptr() as *const _,
             );
@@ -408,14 +397,10 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
         &self,
         src: &ImageRef,
         mask: Option<&ImageRef>,
-        src_x: i16,
-        src_y: i16,
-        mask_x: i16,
-        mask_y: i16,
-        dest_x: i16,
-        dest_y: i16,
-        width: u16,
-        height: u16,
+        src_loc: (i16, i16),
+        mask_loc: (i16, i16),
+        dest_loc: (i16, i16),
+        size: (u16, u16),
     ) -> Option<Region16> {
         let mask_ptr = if let Some(mask) = mask {
             mask.as_ptr()
@@ -430,14 +415,14 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
                 src.as_ptr(),
                 mask_ptr,
                 self.as_ptr(),
-                src_x,
-                src_y,
-                mask_x,
-                mask_y,
-                dest_x,
-                dest_y,
-                width,
-                height,
+                src_loc.0,
+                src_loc.1,
+                mask_loc.0,
+                mask_loc.1,
+                dest_loc.0,
+                dest_loc.1,
+                size.0,
+                size.1,
             )
         };
         if res == 1 {
@@ -459,7 +444,9 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
         }
     }
 
-    pub fn rasterize_trapezoid(&self, trap: Trapezoid, x_off: i32, y_off: i32) {
-        unsafe { ffi::pixman_rasterize_trapezoid(self.as_ptr(), trap.as_ptr(), x_off, y_off) }
+    pub fn rasterize_trapezoid(&self, trap: Trapezoid, offset: (i32, i32)) {
+        unsafe { ffi::pixman_rasterize_trapezoid(self.as_ptr(), trap.as_ptr(), offset.0, offset.1) }
+    }
+    }
     }
 }

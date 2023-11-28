@@ -30,20 +30,16 @@ pub fn main() {
     let dest_img =
         Image::from_slice_mut(FormatCode::A8R8G8B8, WIDTH, HEIGHT, bits, WIDTH * 4, false).unwrap();
 
-    mask_img.add_traps(0, 0, &[trap]);
+    mask_img.add_traps((0, 0), &[trap]);
 
     dest_img.composite(
         Operation::Over,
         &src_img,
         Some(&mask_img),
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        WIDTH as u16,
-        HEIGHT as u16,
+        (0, 0),
+        (0, 0),
+        (0, 0),
+        (WIDTH as u16, HEIGHT as u16),
     );
 
     let out_img = Image::new(
@@ -57,14 +53,10 @@ pub fn main() {
         Operation::Src,
         &dest_img,
         None,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        dest_img.width() as u16,
-        dest_img.height() as u16,
+        (0, 0),
+        (0, 0),
+        (0, 0),
+        (dest_img.width() as u16, dest_img.height() as u16),
     );
 
     let out_data = out_img.data();
