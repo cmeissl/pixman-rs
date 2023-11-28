@@ -7,6 +7,10 @@ name = "pixman"
 rust-version = "1.65.0"
 version = "0.1.0"
 
+[package.metadata.docs.rs]
+features = ["drm-fourcc"]
+rustdoc-args = ["--cfg", "docsrs"]
+
 [dependencies]
 drm-fourcc = {version = "2.2.0", optional = true}
 pixman-sys = {version = "0.1.0", path = "../pixman-sys"}
