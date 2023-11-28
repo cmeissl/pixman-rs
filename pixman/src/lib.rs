@@ -1,4 +1,5 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
+#![warn(missing_debug_implementations)]
 
 use std::os::raw::c_int;
 
