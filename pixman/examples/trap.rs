@@ -1,4 +1,4 @@
-use pixman::{Color, Fixed, FormatCode, Image, Operation, Span, Trap};
+use pixman::{Color, Fixed, FormatCode, Image, Operation, Solid, Span, Trap};
 
 const WIDTH: usize = 200;
 const HEIGHT: usize = 200;
@@ -24,11 +24,11 @@ pub fn main() {
         ),
     );
 
-    let mut mask_img =
-        Image::from_bits(FormatCode::A8, WIDTH, HEIGHT, &mut mbits, WIDTH, false).unwrap();
-    let src_img = Image::solid_fill(white).unwrap();
-    let mut dest_img =
-        Image::from_bits(FormatCode::A8R8G8B8, WIDTH, HEIGHT, bits, WIDTH * 4, false).unwrap();
+    let mask_img =
+        Image::from_slice_mut(FormatCode::A8, WIDTH, HEIGHT, &mut mbits, WIDTH, false).unwrap();
+    let src_img = Solid::new(white).unwrap();
+    let dest_img =
+        Image::from_slice_mut(FormatCode::A8R8G8B8, WIDTH, HEIGHT, bits, WIDTH * 4, false).unwrap();
 
     mask_img.add_traps(0, 0, &[trap]);
 
@@ -46,7 +46,7 @@ pub fn main() {
         HEIGHT as u16,
     );
 
-    let mut out_img = Image::new(
+    let out_img = Image::new(
         FormatCode::A8B8G8R8,
         dest_img.width(),
         dest_img.height(),

@@ -1,12 +1,12 @@
-use pixman::{FormatCode, Image, Operation, Repeat};
+use pixman::{FormatCode, Image, Operation, Repeat, Solid};
 
 pub fn main() {
-    let mut dst = Image::new(FormatCode::A8R8G8B8, 800, 600, true).unwrap();
-    let mut solid = Image::solid_fill([0xffff, 0xffff, 0xffff, 0xffff]).unwrap();
+    let dst = Image::new(FormatCode::A8R8G8B8, 800, 600, true).unwrap();
+    let solid = Solid::new([0xffff, 0xffff, 0xffff, 0xffff]).unwrap();
     solid.set_repeat(Repeat::Normal);
     dst.composite(Operation::Over, &solid, None, 0, 0, 0, 0, 50, 0, 50, 50);
 
-    let mut out_img = Image::new(FormatCode::A8B8G8R8, dst.width(), dst.height(), false).unwrap();
+    let out_img = Image::new(FormatCode::A8B8G8R8, dst.width(), dst.height(), false).unwrap();
     out_img.composite(
         Operation::Src,
         &dst,
