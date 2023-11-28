@@ -5,6 +5,7 @@ use crate::{
     Rectangle16, Region16, Trap, Trapezoid, Triangle,
 };
 
+#[derive(Debug)]
 pub struct Image<'bits, 'alpha, const WRITABLE: bool> {
     image: ImageRef,
     _bits: PhantomData<&'bits ()>,
