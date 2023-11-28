@@ -2,11 +2,13 @@ use pixman_sys as ffi;
 
 use crate::fixed::Fixed;
 
+/// A single point
 #[derive(Debug, Clone, Copy)]
 #[repr(transparent)]
 pub struct Point(ffi::pixman_point_fixed_t);
 
 impl Point {
+    /// Initialize the point from x and y values
     #[inline]
     pub fn new(x: impl Into<Fixed>, y: impl Into<Fixed>) -> Self {
         Self(ffi::pixman_point_fixed {
@@ -15,11 +17,13 @@ impl Point {
         })
     }
 
+    /// Access the x value
     #[inline]
     pub fn x(&self) -> Fixed {
         Fixed::from_raw(self.0.x)
     }
 
+    /// Access the y value
     #[inline]
     pub fn y(&self) -> Fixed {
         Fixed::from_raw(self.0.y)

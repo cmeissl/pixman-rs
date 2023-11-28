@@ -1,10 +1,12 @@
 use crate::{ffi, Fixed, Line};
 
+/// A trapezoid
 #[derive(Debug, Clone, Copy)]
 #[repr(transparent)]
 pub struct Trapezoid(ffi::pixman_trapezoid_t);
 
 impl Trapezoid {
+    /// Initialize a trapezoid from the provided values
     #[inline]
     pub fn new(
         top: impl Into<Fixed>,
@@ -20,21 +22,25 @@ impl Trapezoid {
         })
     }
 
+    /// Access the top component of the trapezoid
     #[inline]
     pub fn top(&self) -> Fixed {
         Fixed::from(self.0.top)
     }
 
+    /// Access the bottom component of the trapezoid
     #[inline]
     pub fn bottom(&self) -> Fixed {
         Fixed::from(self.0.bottom)
     }
 
+    /// Access the left component of the trapezoid
     #[inline]
     pub fn left(&self) -> Line {
         Line::from(self.0.left)
     }
 
+    /// Access the right component of the trapezoid
     #[inline]
     pub fn right(&self) -> Line {
         Line::from(self.0.right)

@@ -2,9 +2,14 @@ use std::ffi::c_int;
 
 use crate::{ffi, image_type, CreateFailed, Fixed, GradientStop, Point};
 
-image_type!(RadialGradient);
+image_type! {
+    /// Radial gradient image
+    #[derive(Debug)]
+    RadialGradient
+}
 
 impl RadialGradient<'static> {
+    /// Create a new radial gradient image usable as the src in blit operations
     pub fn new(
         inner: impl Into<Point>,
         outer: impl Into<Point>,

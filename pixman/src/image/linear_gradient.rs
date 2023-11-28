@@ -2,9 +2,14 @@ use std::ffi::c_int;
 
 use crate::{ffi, image_type, CreateFailed, GradientStop, Point};
 
-image_type!(LinearGradient);
+image_type! {
+    /// Linear gradient image
+    #[derive(Debug)]
+    LinearGradient
+}
 
 impl LinearGradient<'static> {
+    /// Create a new linear gradient image usable as the src in blit operations
     pub fn new(
         p1: impl Into<Point>,
         p2: impl Into<Point>,

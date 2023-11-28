@@ -1,13 +1,24 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
-#![warn(missing_debug_implementations)]
-
+#![warn(missing_docs, missing_debug_implementations)]
+//! # From the official [pixman docs](https://www.pixman.org/):
+//!
+//! > Pixman is a low-level software library for pixel manipulation, providing features such as image compositing and trapezoid rasterization.
+//! > Important users of pixman are the cairo graphics library and the X server.
+//! >
+//! > Pixman is implemented as a library in the C programming language. It runs on many platforms, including Linux, BSD Derivatives, MacOS X, and Windows.
+//! >
+//! > Pixman is free and open source software. It is available to be redistributed and/or modified under the terms of the MIT license.
 use std::os::raw::c_int;
 
 pub use pixman_sys as ffi;
 
+/// 16bit Box
 pub type Box16 = ffi::pixman_box16_t;
+/// 32bit Box
 pub type Box32 = ffi::pixman_box32_t;
+/// 16bit Rectangle
 pub type Rectangle16 = ffi::pixman_rectangle16_t;
+/// 32bit Rectangle
 pub type Rectangle32 = ffi::pixman_rectangle32_t;
 
 mod color;
@@ -50,10 +61,12 @@ pub use trapezoid::*;
 pub use triangle::*;
 pub use vector::*;
 
+/// The requested operation failed
 #[derive(Debug, thiserror::Error)]
 #[error("The requested operation failed")]
 pub struct OperationFailed;
 
+/// Blit the src into the dst with the specified values
 #[allow(clippy::too_many_arguments)]
 pub fn blit(
     src_bits: &[u32],
@@ -92,6 +105,7 @@ pub fn blit(
     }
 }
 
+/// Fill the provided bits with the provided values
 #[allow(clippy::too_many_arguments)]
 pub fn fill(
     bits: &mut [u32],
