@@ -6,6 +6,7 @@ license = "MIT"
 name = "pixman"
 rust-version = "1.65.0"
 version = "0.1.0"
+readme = "../README.md"
 
 [package.metadata.docs.rs]
 features = ["drm-fourcc"]
