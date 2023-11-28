@@ -34,14 +34,10 @@ pub fn main() {
                 Operation::Src,
                 &fill,
                 None,
-                0,
-                0,
-                0,
-                0,
-                (j * TILE_SIZE) as i16,
-                (i * TILE_SIZE) as i16,
-                TILE_SIZE as u16,
-                TILE_SIZE as u16,
+                (0, 0),
+                (0, 0),
+                ((j * TILE_SIZE) as i16, (i * TILE_SIZE) as i16),
+                (TILE_SIZE as u16, TILE_SIZE as u16),
             );
         }
     }
@@ -55,14 +51,10 @@ pub fn main() {
         Operation::Src,
         &checkerboard,
         None,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        WIDTH as u16,
-        HEIGHT as u16,
+        (0, 0),
+        (0, 0),
+        (0, 0),
+        (WIDTH as u16, HEIGHT as u16),
     );
 
     let out_img = Image::new(
@@ -76,14 +68,10 @@ pub fn main() {
         Operation::Src,
         &destination,
         None,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        destination.width() as u16,
-        destination.height() as u16,
+        (0, 0),
+        (0, 0),
+        (0, 0),
+        (destination.width() as u16, destination.height() as u16),
     );
 
     let out_data = out_img.data();
