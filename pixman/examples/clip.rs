@@ -36,14 +36,10 @@ pub fn main() {
         Operation::Over,
         &gradient_img,
         None,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        WIDTH as u16,
-        HEIGHT as u16,
+        (0, 0),
+        (0, 0),
+        (0, 0),
+        (WIDTH as u16, HEIGHT as u16),
     );
 
     let clip_region = Region32::init_rect(50, 0, 100, 200);
@@ -68,14 +64,10 @@ pub fn main() {
         Operation::Over,
         &src_img,
         None,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        WIDTH as u16,
-        HEIGHT as u16,
+        (0, 0),
+        (0, 0),
+        (0, 0),
+        (WIDTH as u16, HEIGHT as u16),
     );
 
     let out_img = Image::new(
@@ -89,14 +81,10 @@ pub fn main() {
         Operation::Src,
         &dst_img,
         None,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        dst_img.width() as u16,
-        dst_img.height() as u16,
+        (0, 0),
+        (0, 0),
+        (0, 0),
+        (dst_img.width() as u16, dst_img.height() as u16),
     );
 
     let out_data = out_img.data();
