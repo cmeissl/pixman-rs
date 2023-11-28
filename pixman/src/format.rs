@@ -1,4 +1,5 @@
 use pixman_sys as ffi;
+use thiserror::Error;
 
 #[derive(Debug, Clone, Copy)]
 pub enum FormatCode {
@@ -62,11 +63,12 @@ impl FormatCode {
     }
 }
 
-#[derive(Debug)]
-pub struct UnknownFormat(ffi::pixman_format_code_t);
+#[derive(Debug, Error)]
+#[error("Unknown format code {0}")]
+pub struct UnknownFormatCode(ffi::pixman_format_code_t);
 
 impl TryFrom<ffi::pixman_format_code_t> for FormatCode {
-    type Error = UnknownFormat;
+    type Error = UnknownFormatCode;
 
     fn try_from(value: ffi::pixman_format_code_t) -> Result<Self, Self::Error> {
         let format = match value {
@@ -120,7 +122,7 @@ impl TryFrom<ffi::pixman_format_code_t> for FormatCode {
             ffi::pixman_format_code_t_PIXMAN_g1 => FormatCode::G1,
             ffi::pixman_format_code_t_PIXMAN_yuy2 => FormatCode::YUY2,
             ffi::pixman_format_code_t_PIXMAN_yv12 => FormatCode::YV12,
-            _ => return Err(UnknownFormat(value)),
+            _ => return Err(UnknownFormatCode(value)),
         };
         Ok(format)
     }
@@ -183,8 +185,9 @@ impl From<FormatCode> for ffi::pixman_format_code_t {
 }
 
 #[cfg(feature = "drm-fourcc")]
-#[derive(Debug)]
-pub struct UnsupportedDrmFourcc;
+#[derive(Debug, Error)]
+#[error("Unsupported drm fourcc {0}")]
+pub struct UnsupportedDrmFourcc(drm_fourcc::DrmFourcc);
 
 #[cfg(feature = "drm-fourcc")]
 impl TryFrom<drm_fourcc::DrmFourcc> for FormatCode {
@@ -248,15 +251,20 @@ impl TryFrom<drm_fourcc::DrmFourcc> for FormatCode {
 
             #[cfg(target_endian = "little")]
             DrmFourcc::Abgr2101010 => FormatCode::A2B10G10R10,
-            _ => return Err(UnsupportedDrmFourcc),
+            other => return Err(UnsupportedDrmFourcc(other)),
         };
         Ok(format)
     }
 }
 
 #[cfg(feature = "drm-fourcc")]
+#[derive(Debug, Error)]
+#[error("Unsupported format code {0:?}")]
+pub struct UnsupportedFormatCode(FormatCode);
+
+#[cfg(feature = "drm-fourcc")]
 impl TryFrom<FormatCode> for drm_fourcc::DrmFourcc {
-    type Error = UnsupportedDrmFourcc;
+    type Error = UnsupportedFormatCode;
 
     fn try_from(value: FormatCode) -> Result<Self, Self::Error> {
         use drm_fourcc::DrmFourcc;
@@ -316,7 +324,7 @@ impl TryFrom<FormatCode> for drm_fourcc::DrmFourcc {
 
             #[cfg(target_endian = "little")]
             FormatCode::A2B10G10R10 => DrmFourcc::Abgr2101010,
-            _ => return Err(UnsupportedDrmFourcc),
+            other => return Err(UnsupportedFormatCode(other)),
         };
         Ok(format)
     }
