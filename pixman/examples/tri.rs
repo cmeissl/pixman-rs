@@ -14,8 +14,8 @@ pub fn main() {
     let color = Color::new(0x4444, 0x4444, 0xffff, 0xffff);
     let mut bits = [0u32; WIDTH * HEIGHT];
 
-    for i in 0..(WIDTH * HEIGHT) {
-        bits[i] = ((i / HEIGHT) as u32) * 0x01010000;
+    for (i, item) in bits.iter_mut().enumerate().take(WIDTH * HEIGHT) {
+        *item = ((i / HEIGHT) as u32) * 0x01010000;
     }
 
     let src_img = Solid::new(color).unwrap();
