@@ -63,8 +63,8 @@ pub fn main() {
         out_img.height() as u32,
         unsafe {
             std::slice::from_raw_parts(
-                out_data.as_ptr() as *const _,
-                out_data.len() * std::mem::size_of::<u32>(),
+                out_img.data() as *const u8,
+                out_img.stride() * out_img.height(),
             )
         },
     )
@@ -104,14 +104,10 @@ fn draw_checkerboard(image: &Image<'_, '_>, check_size: usize, color1: u32, colo
                 Operation::Src,
                 src,
                 None,
-                0,
-                0,
-                0,
-                0,
-                (i * check_size) as i32,
-                (j * check_size) as i32,
-                check_size as i32,
-                check_size as i32,
+                (0, 0),
+                (0, 0),
+                ((i * check_size) as i32, (j * check_size) as i32),
+                (check_size as i32, check_size as i32),
             );
         }
     }
