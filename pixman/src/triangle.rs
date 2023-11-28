@@ -1,10 +1,12 @@
 use crate::{ffi, Point};
 
+/// A triangle
 #[derive(Debug, Clone, Copy)]
 #[repr(transparent)]
 pub struct Triangle(ffi::pixman_triangle_t);
 
 impl Triangle {
+    /// Initialize the triangle from the provided values
     pub fn new(p1: impl Into<Point>, p2: impl Into<Point>, p3: impl Into<Point>) -> Self {
         Self(ffi::pixman_triangle_t {
             p1: p1.into().into(),
@@ -13,16 +15,19 @@ impl Triangle {
         })
     }
 
+    /// Access the first point of this triangle
     #[inline]
     pub fn p1(&self) -> Point {
         self.0.p1.into()
     }
 
+    /// Access the second point of this triangle
     #[inline]
     pub fn p2(&self) -> Point {
         self.0.p2.into()
     }
 
+    /// Access the third point of this triangle
     #[inline]
     pub fn p3(&self) -> Point {
         self.0.p3.into()

@@ -1,63 +1,118 @@
 use pixman_sys as ffi;
 use thiserror::Error;
 
+/// Defines the possible operations for composition
 #[derive(Debug, Clone, Copy)]
 pub enum Operation {
+    /// Clear
     Clear,
+    /// Src
     Src,
+    /// Dst
     Dst,
+    /// Over
     Over,
+    /// Over-reverse
     OverReverse,
+    /// In
     In,
+    /// In-reverse
     InReverse,
+    /// Out
     Out,
+    /// Out-reverse
     OutReverse,
+    /// A-top
     Atop,
+    /// A-top-reverse
     AtopReverse,
+    /// Xor
     Xor,
+    /// Add
     Add,
+    /// Saturate
     Saturate,
+    /// Disjoint-clear
     DisjointClear,
+    /// Disjoint-src
     DisjointSrc,
+    /// Disjoint-dst
     DisjointDst,
+    /// Disjoint-over
     DisjointOver,
+    /// Disjoint-over-reverse
     DisjointOverReverse,
+    /// Disjoint-in
     DisjointIn,
+    /// Disjoint-in-reverse
     DisjointInReverse,
+    /// Disjoint-out
     DisjointOut,
+    /// Disjoint-out-reverse
     DisjointOutReverse,
+    /// Disjoint-a-top
     DisjointAtop,
+    /// Disjoint-a-top-reverse
     DisjointAtopReverse,
+    /// Disjoint-xor
     DisjointXor,
+    /// Conjoint-clear
     ConjointClear,
+    /// Conjoint-src
     ConjointSrc,
+    /// Conjoint-dst
     ConjointDst,
+    /// Conjoint-over
     ConjointOver,
+    /// Conjoint-over-reverse
     ConjointOverReverse,
+    /// Conjoint-in
     ConjointIn,
+    /// Conjoint-in-reverse
     ConjointInReverse,
+    /// Conjoint-out
     ConjointOut,
+    /// Conjoint-out-reverse
     ConjointOutReverse,
+    /// Conjoint-a-top
     ConjointAtop,
+    /// Conjoint-a-top-reverse
     ConjointAtopReverse,
+    /// Conjoint-xor
     ConjointXor,
+    /// Multiply
     Multiply,
+    /// Screen
     Screen,
+    /// Overlay
     Overlay,
+    /// Darken
     Darken,
+    /// Lighten
     Lighten,
+    /// Color dodge
     ColorDodge,
+    /// Color burn
     ColorBurn,
+    /// Hard-light
     HardLight,
+    /// Soft-light
     SoftLight,
+    /// Difference
     Difference,
+    /// Exclustion
     Exclustion,
+    /// Hls hue
     HslHue,
+    /// Hls saturation
     HslSaturation,
+    /// Hls color
     HslColor,
+    /// Hls luminosity
     HslLuminosity,
 }
 
+/// The operation is unknown
 #[derive(Debug, Error)]
 #[error("Unknown operation {0}")]
 pub struct UnknownOperation(ffi::pixman_op_t);

@@ -1,10 +1,12 @@
 use crate::{ffi, Fixed};
 
+/// A single span
 #[derive(Debug, Clone, Copy)]
 #[repr(transparent)]
 pub struct Span(ffi::pixman_span_fix_t);
 
 impl Span {
+    /// Initialize the span with from the provided components
     #[inline]
     pub fn new(l: impl Into<Fixed>, r: impl Into<Fixed>, y: impl Into<Fixed>) -> Self {
         Self(ffi::pixman_span_fix_t {
@@ -14,16 +16,19 @@ impl Span {
         })
     }
 
+    /// Get the l component of this span
     #[inline]
     pub fn l(&self) -> Fixed {
         Fixed::from(self.0.l)
     }
 
+    /// Get the r component of this span
     #[inline]
     pub fn r(&self) -> Fixed {
         Fixed::from(self.0.r)
     }
 
+    /// Get the y component of this span
     #[inline]
     pub fn y(&self) -> Fixed {
         Fixed::from(self.0.y)

@@ -1,17 +1,26 @@
 use pixman_sys as ffi;
 use thiserror::Error;
 
+/// Defines the possible filter operations
 #[derive(Debug, Clone, Copy)]
 pub enum Filter {
+    /// Fast filtering
     Fast,
+    /// Good filtering
     Good,
+    /// Best filtering
     Best,
+    /// Nearest-neighbor filtering
     Nearest,
+    /// Bilinear filtering
     Bilinear,
+    /// Custom convolution kernel
     Convolution,
+    /// Custom separable convolution kernel
     SeparableConvolution,
 }
 
+/// The filter operation is unknown
 #[derive(Debug, Error)]
 #[error("Unknown filter {0}")]
 pub struct UnknownFilter(ffi::pixman_dither_t);

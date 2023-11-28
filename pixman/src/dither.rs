@@ -1,16 +1,24 @@
 use pixman_sys as ffi;
 use thiserror::Error;
 
+/// Defiens the possible dither operations
 #[derive(Debug, Clone, Copy)]
 pub enum Dither {
+    /// No dithering
     None,
+    /// Fast dithering
     Fast,
+    /// Good dithering
     Good,
+    /// Best dithering
     Best,
+    /// Ordered bayer 8 dithering
     OrderedBayer8,
+    /// Ordered blue noise 64
     OrderedBlueNoise64,
 }
 
+/// The dither operation is unknown
 #[derive(Debug, Error)]
 #[error("Unknown dither {0}")]
 pub struct UnknownDither(ffi::pixman_dither_t);

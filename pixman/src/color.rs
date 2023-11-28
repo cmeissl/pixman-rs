@@ -1,13 +1,14 @@
 use pixman_sys as ffi;
 
+/// Rgba color in the range of [`u16::MIN`] to [`u16::MAX`]
 #[derive(Debug, Clone, Copy)]
 #[repr(transparent)]
 pub struct Color(ffi::pixman_color_t);
 
 impl Color {
-    /// Create a [`Color`] from single components
+    /// Create a [`Color`] from the provided components
     ///
-    /// Note: Color component range from [`u16::MIN`] to [`u16::MAX`]
+    /// Note: Color component range of [`u16::MIN`] to [`u16::MAX`]
     #[inline]
     pub fn new(r: u16, g: u16, b: u16, a: u16) -> Self {
         Self(ffi::pixman_color_t {
@@ -18,11 +19,17 @@ impl Color {
         })
     }
 
+    /// Create a [`Color`] from the provided components
+    ///
+    /// Note: Color component range of `0f32` to `1f32`
     #[inline]
     pub fn from_f32(r: f32, g: f32, b: f32, a: f32) -> Self {
         Self::from_f64(r as f64, g as f64, b as f64, a as f64)
     }
 
+    /// Create a [`Color`] from the provided components
+    ///
+    /// Note: Color component range of `0f64` to `1f64`
     #[inline]
     pub fn from_f64(r: f64, g: f64, b: f64, a: f64) -> Self {
         Self(ffi::pixman_color_t {
@@ -33,6 +40,7 @@ impl Color {
         })
     }
 
+    /// Create a [`Color`] from the provided color value
     #[inline]
     pub fn from_u32(color8: u32) -> Self {
         let alpha = (color8 & 0xff000000) >> 24;
@@ -48,21 +56,25 @@ impl Color {
         Self::new(red as u16, green as u16, blue as u16, alpha as u16)
     }
 
+    /// Get the red color component
     #[inline]
     pub fn r(&self) -> u16 {
         self.0.red
     }
 
+    /// Get the green color component
     #[inline]
     pub fn g(&self) -> u16 {
         self.0.green
     }
 
+    /// Get the blue color component
     #[inline]
     pub fn b(&self) -> u16 {
         self.0.blue
     }
 
+    /// Get the alpha color component
     #[inline]
     pub fn a(&self) -> u16 {
         self.0.alpha
