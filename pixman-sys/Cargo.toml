@@ -8,6 +8,3 @@ rust-version = "1.65.0"
 version = "0.1.0"
 
 [dependencies]
-
-[build-dependencies]
-pkg-config = "0.3"
