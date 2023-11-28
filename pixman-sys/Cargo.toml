@@ -10,5 +10,4 @@ version = "0.1.0"
 [dependencies]
 
 [build-dependencies]
-bindgen = "0.68"
 pkg-config = "0.3"
