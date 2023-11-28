@@ -16,7 +16,7 @@ impl Fixed {
     #[inline]
     #[doc(alias = "pixman_int_to_fixed")]
     pub const fn from_int(value: i32) -> Self {
-        Self((value << 16) as ffi::pixman_fixed_t)
+        Self(((value as u32) << 16) as ffi::pixman_fixed_t)
     }
 
     #[inline]
