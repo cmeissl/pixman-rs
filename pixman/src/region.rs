@@ -2,6 +2,17 @@ use paste::paste;
 
 use crate::{Box16, Box32};
 
+/// Describes overlap of a region with a rectangle
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub enum Overlap {
+    /// No intersection
+    Out,
+    /// Region contains a rectangle
+    In,
+    /// Partial intersection
+    Part,
+}
+
 macro_rules! impl_region {
     ($(#[$attr:meta])* $name:ident, ffi => $ffi:path, impl => $impl:ident, box_t => $box_t:path, loc_t => $loc_t:path, size_t => $size_t:path$(,)?) => {
         $(#[$attr])*
@@ -204,14 +215,14 @@ macro_rules! impl_region {
             }
 
             /// Whether this region contains the provided rectangle
-            pub fn contains_rectangle(&self, rect: $box_t) -> Option<usize> {
+            pub fn contains_rectangle(&self, rect: $box_t) -> Overlap {
                 let overlap =
                     unsafe { paste!($crate::ffi::[<$impl _contains_rectangle>](&self.0, &rect)) };
-
-                if overlap > 0 {
-                    Some(overlap as usize)
-                } else {
-                    None
+                match overlap {
+                    $crate::ffi::pixman_region_overlap_t_PIXMAN_REGION_OUT => Overlap::Out,
+                    $crate::ffi::pixman_region_overlap_t_PIXMAN_REGION_IN => Overlap::In,
+                    $crate::ffi::pixman_region_overlap_t_PIXMAN_REGION_PART => Overlap::Part,
+                    _ => unreachable!(),
                 }
             }
 
