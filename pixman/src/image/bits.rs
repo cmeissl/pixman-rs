@@ -13,6 +13,10 @@ pub struct Image<'bits, 'alpha> {
     _alpha: PhantomData<&'alpha ()>,
 }
 
+// SAFETY: An image is safe to `Send` if the image and its alpha map have a
+// reference count of one. So references will not exist on multiple threads.
+unsafe impl<'bits, 'alpha> Send for Image<'bits, 'alpha> {}
+
 impl<'bits, 'alpha> std::ops::Deref for Image<'bits, 'alpha> {
     type Target = ImageRef;
 
@@ -130,7 +134,7 @@ impl<'bits, 'a> Image<'bits, 'a> {
     /// used as a src in a blit operation
     pub fn set_alpha_map<'alpha: 'a>(
         self,
-        alpha_map: &'alpha Image<'_, 'static>,
+        alpha_map: Image<'alpha, 'static>,
         x: i16,
         y: i16,
     ) -> Image<'bits, 'alpha> {
@@ -467,7 +471,10 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
     ///
     /// # Safety
     ///
-    /// The pointer is expected to be valid and have a ref-count of at least one.
+    /// The pointer is expected to be valid and have a ref-count of at *exactly* one,
+    /// with an alpha map (if any) that has a ref count of one. This restriction allows
+    /// [`Image`] to safely implement [`Send`].
+    ///
     /// Ownership of the pointer is transferred and unref will be called on drop.
     pub unsafe fn from_ptr(ptr: *mut ffi::pixman_image_t) -> Self {
         Self {

@@ -190,7 +190,7 @@ macro_rules! image_type {
             /// used as a src in a blit operation
             pub fn set_alpha_map<'alpha: 'a>(
                 self,
-                alpha_map: &'alpha crate::Image<'_, 'static>,
+                alpha_map: crate::Image<'alpha, 'static>,
                 x: i16,
                 y: i16,
             ) -> $name<'alpha> {
