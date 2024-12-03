@@ -21,6 +21,12 @@ impl<'bits, 'alpha> std::ops::Deref for Image<'bits, 'alpha> {
     }
 }
 
+impl<'bits, 'alpha> std::ops::DerefMut for Image<'bits, 'alpha> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.image
+    }
+}
+
 impl Image<'static, 'static> {
     /// Create a new image with the specified format and size
     pub fn new(

@@ -247,6 +247,12 @@ macro_rules! image_type {
                 &self.image
             }
         }
+
+        impl<'alpha> std::ops::DerefMut for $name<'alpha> {
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.image
+            }
+        }
     };
 }
 
