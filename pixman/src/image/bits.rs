@@ -201,7 +201,7 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
 
     /// Fill this image with the specified boxes and color
     pub fn fill_boxes(
-        &self,
+        &mut self,
         op: Operation,
         color: impl Into<Color>,
         boxes: &[Box32],
@@ -225,7 +225,7 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
 
     /// Fill this image with the specified rectangles and color
     pub fn fill_rectangles(
-        &self,
+        &mut self,
         op: Operation,
         color: impl Into<Color>,
         rects: &[Rectangle16],
@@ -250,7 +250,7 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
     /// Composite the specified src image into this image
     #[allow(clippy::too_many_arguments)]
     pub fn composite(
-        &self,
+        &mut self,
         operation: Operation,
         src: &ImageRef,
         mask: Option<&ImageRef>,
@@ -286,7 +286,7 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
     /// Composite the specified src image into this image
     #[allow(clippy::too_many_arguments)]
     pub fn composite32(
-        &self,
+        &mut self,
         operation: Operation,
         src: &ImageRef,
         mask: Option<&ImageRef>,
@@ -320,7 +320,7 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
 
     /// Composite the specified triangles into this image
     pub fn composite_triangles(
-        &self,
+        &mut self,
         operation: Operation,
         src: &ImageRef,
         mask_format: FormatCode,
@@ -346,7 +346,7 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
 
     /// Composite the specified trapezoids into this image
     pub fn composite_trapezoids(
-        &self,
+        &mut self,
         operation: Operation,
         src: &ImageRef,
         mask_format: FormatCode,
@@ -371,7 +371,7 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
     }
 
     /// Add the specified traps to this image
-    pub fn add_traps(&self, offset: (i16, i16), traps: &[Trap]) {
+    pub fn add_traps(&mut self, offset: (i16, i16), traps: &[Trap]) {
         unsafe {
             ffi::pixman_add_traps(
                 self.as_ptr(),
@@ -384,7 +384,7 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
     }
 
     /// Add the specified trapezoids to this image
-    pub fn add_trapezoids(&self, offset: (i16, i32), traps: &[Trapezoid]) {
+    pub fn add_trapezoids(&mut self, offset: (i16, i32), traps: &[Trapezoid]) {
         unsafe {
             ffi::pixman_add_trapezoids(
                 self.as_ptr(),
@@ -397,7 +397,7 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
     }
 
     /// Add the specified triangles to this image
-    pub fn add_triangles(&self, offset: (i32, i32), tris: &[Triangle]) {
+    pub fn add_triangles(&mut self, offset: (i32, i32), tris: &[Triangle]) {
         unsafe {
             ffi::pixman_add_triangles(
                 self.as_ptr(),
@@ -450,7 +450,7 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
     }
 
     /// Rasterize the specified edges
-    pub fn rasterize_edges(&self, l: Edge, r: Edge, t: impl Into<Fixed>, b: impl Into<Fixed>) {
+    pub fn rasterize_edges(&mut self, l: Edge, r: Edge, t: impl Into<Fixed>, b: impl Into<Fixed>) {
         unsafe {
             ffi::pixman_rasterize_edges(
                 self.as_ptr(),
@@ -463,7 +463,7 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
     }
 
     /// Rasterize the specified trapezoids
-    pub fn rasterize_trapezoid(&self, trap: Trapezoid, offset: (i32, i32)) {
+    pub fn rasterize_trapezoid(&mut self, trap: Trapezoid, offset: (i32, i32)) {
         unsafe { ffi::pixman_rasterize_trapezoid(self.as_ptr(), trap.as_ptr(), offset.0, offset.1) }
     }
 }

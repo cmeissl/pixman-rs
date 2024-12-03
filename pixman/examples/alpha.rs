@@ -21,7 +21,7 @@ pub fn main() {
     ]);
 
     let mut alpha = [0x4f00004fu32; WIDTH * HEIGHT]; /* pale blue */
-    let alpha_img = Image::from_slice_mut(
+    let mut alpha_img = Image::from_slice_mut(
         FormatCode::A8R8G8B8,
         WIDTH,
         HEIGHT,
@@ -32,7 +32,7 @@ pub fn main() {
     .unwrap();
 
     let mut dest = [0xffffff00u32; WIDTH * HEIGHT]; /* yellow */
-    let dest_img = Image::from_slice_mut(
+    let mut dest_img = Image::from_slice_mut(
         FormatCode::A8R8G8B8,
         WIDTH,
         HEIGHT,
@@ -53,7 +53,7 @@ pub fn main() {
     )
     .unwrap();
 
-    let grad_img = LinearGradient::new(p1, p2, &stops).unwrap();
+    let mut grad_img = LinearGradient::new(p1, p2, &stops).unwrap();
     grad_img.set_transform(transform).unwrap();
     grad_img.set_repeat(Repeat::Pad);
 
@@ -79,7 +79,7 @@ pub fn main() {
         ((10 * WIDTH) as u16, HEIGHT as u16),
     );
 
-    let out_img = Image::new(
+    let mut out_img = Image::new(
         FormatCode::A8B8G8R8,
         dest_img.width(),
         dest_img.height(),

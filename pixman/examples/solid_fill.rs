@@ -1,8 +1,8 @@
 use pixman::{FormatCode, Image, Operation, Repeat, Solid};
 
 pub fn main() {
-    let dst = Image::new(FormatCode::A8R8G8B8, 800, 600, true).unwrap();
-    let solid = Solid::new([0xffff, 0xffff, 0xffff, 0xffff]).unwrap();
+    let mut dst = Image::new(FormatCode::A8R8G8B8, 800, 600, true).unwrap();
+    let mut solid = Solid::new([0xffff, 0xffff, 0xffff, 0xffff]).unwrap();
     solid.set_repeat(Repeat::Normal);
     dst.composite(
         Operation::Over,
@@ -14,7 +14,7 @@ pub fn main() {
         (50, 50),
     );
 
-    let out_img = Image::new(FormatCode::A8B8G8R8, dst.width(), dst.height(), false).unwrap();
+    let mut out_img = Image::new(FormatCode::A8B8G8R8, dst.width(), dst.height(), false).unwrap();
     out_img.composite(
         Operation::Src,
         &dst,

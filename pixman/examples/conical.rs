@@ -10,9 +10,9 @@ const HEIGHT: usize = SIZE * NUM_ROWS;
 const NUM_GRADIENTS: usize = 35;
 
 pub fn main() {
-    let dest_img = Image::new(FormatCode::A8R8G8B8, WIDTH, HEIGHT, false).unwrap();
+    let mut dest_img = Image::new(FormatCode::A8R8G8B8, WIDTH, HEIGHT, false).unwrap();
 
-    draw_checkerboard(&dest_img, 25, 0xffaaaaaa, 0xff888888);
+    draw_checkerboard(&mut dest_img, 25, 0xffaaaaaa, 0xff888888);
 
     let transform = Transform::identity()
         .translate(0.5, 0.5, true)
@@ -26,7 +26,7 @@ pub fn main() {
         let column = i % GRADIENTS_PER_ROW;
         let row = i / GRADIENTS_PER_ROW;
 
-        let src_img = create_conical(i);
+        let mut src_img = create_conical(i);
         src_img.set_repeat(Repeat::Normal);
         src_img.set_transform(transform).unwrap();
 
@@ -41,7 +41,7 @@ pub fn main() {
         );
     }
 
-    let out_img = Image::new(
+    let mut out_img = Image::new(
         FormatCode::A8B8G8R8,
         dest_img.width(),
         dest_img.height(),
@@ -89,7 +89,7 @@ fn create_conical(index: usize) -> ConicalGradient<'static> {
     .unwrap()
 }
 
-fn draw_checkerboard(image: &Image<'_, '_>, check_size: usize, color1: u32, color2: u32) {
+fn draw_checkerboard(image: &mut Image<'_, '_>, check_size: usize, color1: u32, color2: u32) {
     let c1 = Solid::new(color1).unwrap();
     let c2 = Solid::new(color2).unwrap();
 

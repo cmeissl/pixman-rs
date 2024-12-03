@@ -30,14 +30,17 @@ pub struct ImageRef(*mut ffi::pixman_image_t);
 
 impl ImageRef {
     /// Set the repeat operation for this image
-    pub fn set_repeat(&self, repeat: Repeat) {
+    pub fn set_repeat(&mut self, repeat: Repeat) {
         unsafe {
             ffi::pixman_image_set_repeat(self.0, repeat.into());
         }
     }
 
     /// Apply the specified transform during sampling from this image
-    pub fn set_transform(&self, transform: impl Into<Transform>) -> Result<(), OperationFailed> {
+    pub fn set_transform(
+        &mut self,
+        transform: impl Into<Transform>,
+    ) -> Result<(), OperationFailed> {
         let transform = transform.into();
         let res = unsafe { ffi::pixman_image_set_transform(self.0, transform.as_ptr()) };
         if res == 1 {
@@ -58,7 +61,7 @@ impl ImageRef {
     }
 
     /// Apply a clip region used during composition
-    pub fn set_clip_region(&self, region: Option<&Region16>) -> Result<(), OperationFailed> {
+    pub fn set_clip_region(&mut self, region: Option<&Region16>) -> Result<(), OperationFailed> {
         let region = if let Some(region) = region {
             region.as_ptr()
         } else {
@@ -73,7 +76,7 @@ impl ImageRef {
     }
 
     /// Apply a clip region used during composition
-    pub fn set_clip_region32(&self, region: Option<&Region32>) -> Result<(), OperationFailed> {
+    pub fn set_clip_region32(&mut self, region: Option<&Region32>) -> Result<(), OperationFailed> {
         let region = if let Some(region) = region {
             region.as_ptr()
         } else {
@@ -88,20 +91,20 @@ impl ImageRef {
     }
 
     /// Set the dither operation used during composition
-    pub fn set_dither(&self, dither: Dither) {
+    pub fn set_dither(&mut self, dither: Dither) {
         unsafe {
             ffi::pixman_image_set_dither(self.0, dither.into());
         }
     }
 
     /// Set the dither offset
-    pub fn set_dither_offset(&self, offset_x: c_int, offset_y: c_int) {
+    pub fn set_dither_offset(&mut self, offset_x: c_int, offset_y: c_int) {
         unsafe { ffi::pixman_image_set_dither_offset(self.0, offset_x, offset_y) }
     }
 
     /// Set the filter operation used during composition
     pub fn set_filter(
-        &self,
+        &mut self,
         filter: Filter,
         filter_params: &[Fixed],
     ) -> Result<(), OperationFailed> {
@@ -121,7 +124,7 @@ impl ImageRef {
     }
 
     /// Set whether the source clip was set by a client
-    pub fn set_has_client_clip(&self, client_clip: bool) {
+    pub fn set_has_client_clip(&mut self, client_clip: bool) {
         let client_clip = if client_clip { 1 } else { 0 };
         unsafe {
             ffi::pixman_image_set_has_client_clip(self.0, client_clip);
@@ -132,7 +135,7 @@ impl ImageRef {
     //pub fn set_indexed(&mut self)
 
     /// Set whether the clip applies when the image is used as a source
-    pub fn set_source_clipping(&self, source_clipping: bool) {
+    pub fn set_source_clipping(&mut self, source_clipping: bool) {
         let source_clipping = if source_clipping { 1 } else { 0 };
         unsafe {
             ffi::pixman_image_set_source_clipping(self.0, source_clipping);
@@ -145,7 +148,7 @@ impl ImageRef {
     }
 
     /// Set whether the image has component alpha or unified alpha
-    pub fn set_component_alpha(&self, component_alpha: bool) {
+    pub fn set_component_alpha(&mut self, component_alpha: bool) {
         let component_alpha = if component_alpha { 1 } else { 0 };
         unsafe { ffi::pixman_image_set_component_alpha(self.0, component_alpha) }
     }
