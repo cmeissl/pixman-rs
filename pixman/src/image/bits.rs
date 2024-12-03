@@ -491,6 +491,9 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
     ///
     /// The pointer is expected to be valid and have a ref-count of at least one.
     /// Ownership of the pointer is transferred and unref will be called on drop.
+    ///
+    /// Any other references to the `pixman_image_t` must not be mutated while this
+    /// `Image` exists, including changes to the reference count.
     pub unsafe fn from_ptr(ptr: *mut ffi::pixman_image_t) -> Self {
         Self {
             image: unsafe { ImageRef::from_ptr(ptr) },
