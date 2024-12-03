@@ -21,7 +21,7 @@ pub fn main() {
     ]);
 
     let mut dest = [0xff00ff00u32; WIDTH * HEIGHT];
-    let dest_img = Image::from_slice_mut(
+    let mut dest_img = Image::from_slice_mut(
         FormatCode::A8R8G8B8,
         WIDTH,
         HEIGHT,
@@ -31,7 +31,7 @@ pub fn main() {
     )
     .unwrap();
 
-    let src_img = LinearGradient::new(p1, p2, &stops).unwrap();
+    let mut src_img = LinearGradient::new(p1, p2, &stops).unwrap();
 
     src_img.set_transform(transform).unwrap();
     src_img.set_repeat(Repeat::None);
@@ -46,7 +46,7 @@ pub fn main() {
         ((10 * WIDTH) as u16, HEIGHT as u16),
     );
 
-    let out_img = Image::new(
+    let mut out_img = Image::new(
         FormatCode::A8B8G8R8,
         dest_img.width(),
         dest_img.height(),

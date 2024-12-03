@@ -19,7 +19,7 @@ pub fn main() {
     }
 
     let src_img = Solid::new(color).unwrap();
-    let dest_img = Image::from_slice_mut(
+    let mut dest_img = Image::from_slice_mut(
         FormatCode::A8R8G8B8,
         WIDTH,
         HEIGHT,
@@ -38,7 +38,7 @@ pub fn main() {
         &tris,
     );
 
-    let out_img = Image::new(
+    let mut out_img = Image::new(
         FormatCode::A8B8G8R8,
         dest_img.width(),
         dest_img.height(),

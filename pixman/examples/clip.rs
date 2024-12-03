@@ -20,7 +20,7 @@ pub fn main() {
     let r_outer = Fixed::from(100.0);
 
     let mut src = [0xff0000ffu32; WIDTH * HEIGHT];
-    let src_img = Image::from_slice_mut(
+    let mut src_img = Image::from_slice_mut(
         FormatCode::A8R8G8B8,
         WIDTH,
         HEIGHT,
@@ -50,7 +50,7 @@ pub fn main() {
     src_img.set_repeat(Repeat::Normal);
 
     let mut dst = [0xffff0000u32; WIDTH * HEIGHT];
-    let dst_img = Image::from_slice_mut(
+    let mut dst_img = Image::from_slice_mut(
         FormatCode::A8R8G8B8,
         WIDTH,
         HEIGHT,
@@ -70,7 +70,7 @@ pub fn main() {
         (WIDTH as u16, HEIGHT as u16),
     );
 
-    let out_img = Image::new(
+    let mut out_img = Image::new(
         FormatCode::A8B8G8R8,
         dst_img.width(),
         dst_img.height(),

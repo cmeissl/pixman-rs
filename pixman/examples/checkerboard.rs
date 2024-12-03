@@ -5,8 +5,8 @@ const HEIGHT: usize = 400;
 const TILE_SIZE: usize = 25;
 
 pub fn main() {
-    let checkerboard = Image::new(FormatCode::A8R8G8B8, WIDTH, HEIGHT, false).unwrap();
-    let destination = Image::new(FormatCode::A8R8G8B8, WIDTH, HEIGHT, false).unwrap();
+    let mut checkerboard = Image::new(FormatCode::A8R8G8B8, WIDTH, HEIGHT, false).unwrap();
+    let mut destination = Image::new(FormatCode::A8R8G8B8, WIDTH, HEIGHT, false).unwrap();
 
     // let transform = Transform::new([
     //     [-1.96830, -1.82250, 512.12250],
@@ -57,7 +57,7 @@ pub fn main() {
         (WIDTH as u16, HEIGHT as u16),
     );
 
-    let out_img = Image::new(
+    let mut out_img = Image::new(
         FormatCode::A8B8G8R8,
         destination.width(),
         destination.height(),
