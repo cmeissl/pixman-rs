@@ -28,3 +28,4 @@ image = "0.24.7"
 [features]
 default = []
 drm-fourcc = ["dep:drm-fourcc"]
+sync = []
