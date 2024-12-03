@@ -13,6 +13,18 @@ pub struct Image<'bits, 'alpha> {
     _alpha: PhantomData<&'alpha ()>,
 }
 
+// SAFETY: A reference to the image is only created by `set_alpha_map`.
+// Which returns a type with a lifetime bound, so `&mut self` methods cannot
+// be called while this additional reference is in use.
+//
+// Thus the only mutability allowed is reference counting, which is made
+// thread-safe with the `REF_COUNT_LOCK` mutex, used when calling
+// `pixman_image_unref`, or `pixman_image_set_alpha_map`.
+#[cfg(feature = "sync")]
+unsafe impl Send for Image<'_, '_> {}
+#[cfg(feature = "sync")]
+unsafe impl Sync for Image<'_, '_> {}
+
 impl<'bits, 'alpha> std::ops::Deref for Image<'bits, 'alpha> {
     type Target = ImageRef;
 
@@ -140,6 +152,8 @@ impl<'bits, 'a> Image<'bits, 'a> {
         x: i16,
         y: i16,
     ) -> Image<'bits, 'alpha> {
+        #[cfg(feature = "sync")]
+        let _lock = crate::REF_COUNT_LOCK.lock().unwrap();
         unsafe {
             ffi::pixman_image_set_alpha_map(self.as_ptr(), alpha_map.as_ptr(), x, y);
         }
@@ -152,6 +166,8 @@ impl<'bits, 'a> Image<'bits, 'a> {
 
     /// Clear a previously set alpha map
     pub fn clear_alpha_map(self) -> Image<'bits, 'static> {
+        #[cfg(feature = "sync")]
+        let _lock = crate::REF_COUNT_LOCK.lock().unwrap();
         unsafe {
             ffi::pixman_image_set_alpha_map(self.as_ptr(), std::ptr::null_mut(), 0, 0);
         }

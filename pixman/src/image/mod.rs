@@ -174,6 +174,8 @@ impl ImageRef {
 
 impl Drop for ImageRef {
     fn drop(&mut self) {
+        #[cfg(feature = "sync")]
+        let _lock = crate::REF_COUNT_LOCK.lock().unwrap();
         unsafe {
             ffi::pixman_image_unref(self.0);
         }
@@ -197,6 +199,8 @@ macro_rules! image_type {
                 x: i16,
                 y: i16,
             ) -> $name<'alpha> {
+                #[cfg(feature = "sync")]
+                let _lock = $crate::REF_COUNT_LOCK.lock().unwrap();
                 unsafe {
                     $crate::ffi::pixman_image_set_alpha_map(
                         self.as_ptr(),
@@ -213,6 +217,8 @@ macro_rules! image_type {
 
             /// Clear a previously set alpha map
             pub fn clear_alpha_map(self) -> $name<'static> {
+                #[cfg(feature = "sync")]
+                let _lock = $crate::REF_COUNT_LOCK.lock().unwrap();
                 unsafe {
                     $crate::ffi::pixman_image_set_alpha_map(
                         self.as_ptr(),

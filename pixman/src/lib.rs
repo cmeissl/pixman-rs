@@ -66,6 +66,9 @@ pub use vector::*;
 #[error("The requested operation failed")]
 pub struct OperationFailed;
 
+#[cfg(feature = "sync")]
+static REF_COUNT_LOCK: std::sync::Mutex<()> = std::sync::Mutex::new(());
+
 /// Blit the src into the dst with the specified values
 #[allow(clippy::too_many_arguments)]
 pub fn blit(
