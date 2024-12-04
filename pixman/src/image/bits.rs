@@ -25,7 +25,7 @@ unsafe impl Send for Image<'_, '_> {}
 #[cfg(feature = "sync")]
 unsafe impl Sync for Image<'_, '_> {}
 
-impl<'bits, 'alpha> std::ops::Deref for Image<'bits, 'alpha> {
+impl std::ops::Deref for Image<'_, '_> {
     type Target = ImageRef;
 
     fn deref(&self) -> &Self::Target {
@@ -33,7 +33,7 @@ impl<'bits, 'alpha> std::ops::Deref for Image<'bits, 'alpha> {
     }
 }
 
-impl<'bits, 'alpha> std::ops::DerefMut for Image<'bits, 'alpha> {
+impl std::ops::DerefMut for Image<'_, '_> {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.image
     }
@@ -179,7 +179,7 @@ impl<'bits, 'a> Image<'bits, 'a> {
     }
 }
 
-impl<'bits, 'alpha> Image<'bits, 'alpha> {
+impl Image<'_, '_> {
     /// Get the width of the image
     pub fn width(&self) -> usize {
         unsafe { ffi::pixman_image_get_width(self.as_ptr()) as usize }
@@ -484,7 +484,7 @@ impl<'bits, 'alpha> Image<'bits, 'alpha> {
     }
 }
 
-impl<'bits, 'alpha> Image<'bits, 'alpha> {
+impl Image<'_, '_> {
     /// Initialize the image from a raw pointer
     ///
     /// # Safety
