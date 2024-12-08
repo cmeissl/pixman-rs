@@ -51,7 +51,7 @@ impl ImageRef {
     }
 
     /// Clear a previously applied transform
-    pub fn clear_transform(&self) -> Result<(), OperationFailed> {
+    pub fn clear_transform(&mut self) -> Result<(), OperationFailed> {
         let res = unsafe { ffi::pixman_image_set_transform(self.0, std::ptr::null()) };
         if res == 1 {
             Ok(())
