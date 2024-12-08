@@ -319,7 +319,7 @@
     }
 
     <span class="doccomment">/// Clear a previously applied transform
-    </span><span class="kw">pub fn </span>clear_transform(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), OperationFailed&gt; {
+    </span><span class="kw">pub fn </span>clear_transform(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), OperationFailed&gt; {
         <span class="kw">let </span>res = <span class="kw">unsafe </span>{ ffi::pixman_image_set_transform(<span class="self">self</span>.<span class="number">0</span>, std::ptr::null()) };
         <span class="kw">if </span>res == <span class="number">1 </span>{
             <span class="prelude-val">Ok</span>(())
