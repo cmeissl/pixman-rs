@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pixman/src/format.rs`."><title>format.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pixman" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pixman/src/format.rs`."><title>format.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pixman" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pixman/</div>format.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers">
+<a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -375,9 +376,8 @@
 <a href="#375" id="375">375</a>
 <a href="#376" id="376">376</a>
 <a href="#377" id="377">377</a>
-<a href="#378" id="378">378</a>
-</pre></div><pre class="rust"><code><span class="kw">use </span>pixman_sys <span class="kw">as </span>ffi;
-<span class="attr">#[cfg(feature = <span class="string">&quot;drm-fourcc&quot;</span>)]
+<a href="#378" id="378">378</a></pre></div><pre class="rust"><code><span class="kw">use </span>pixman_sys <span class="kw">as </span>ffi;
+<span class="attr">#[cfg(feature = <span class="string">"drm-fourcc"</span>)]
 </span><span class="kw">use </span>thiserror::Error;
 
 <span class="doccomment">/// Possible format codes
@@ -608,12 +608,12 @@
 }
 
 <span class="doccomment">/// The provided drm-fourcc has no matching format code
-</span><span class="attr">#[cfg(feature = <span class="string">&quot;drm-fourcc&quot;</span>)]
+</span><span class="attr">#[cfg(feature = <span class="string">"drm-fourcc"</span>)]
 #[derive(Debug, Error)]
-#[error(<span class="string">&quot;Unsupported drm fourcc {0}&quot;</span>)]
+#[error(<span class="string">"Unsupported drm fourcc {0}"</span>)]
 </span><span class="kw">pub struct </span>UnsupportedDrmFourcc(drm_fourcc::DrmFourcc);
 
-<span class="attr">#[cfg(feature = <span class="string">&quot;drm-fourcc&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"drm-fourcc"</span>)]
 </span><span class="kw">impl </span>TryFrom&lt;drm_fourcc::DrmFourcc&gt; <span class="kw">for </span>FormatCode {
     <span class="kw">type </span>Error = UnsupportedDrmFourcc;
 
@@ -621,59 +621,59 @@
         <span class="kw">use </span>drm_fourcc::DrmFourcc;
 
         <span class="kw">let </span>format = <span class="kw">match </span>value {
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>DrmFourcc::Rgb565 =&gt; FormatCode::R5G6B5,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>DrmFourcc::Xrgb8888 =&gt; FormatCode::X8R8G8B8,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>DrmFourcc::Xrgb8888 =&gt; FormatCode::B8G8R8X8,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>DrmFourcc::Argb8888 =&gt; FormatCode::A8R8G8B8,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>DrmFourcc::Argb8888 =&gt; FormatCode::B8G8R8A8,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>DrmFourcc::Xbgr8888 =&gt; FormatCode::X8B8G8R8,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>DrmFourcc::Xbgr8888 =&gt; FormatCode::R8G8B8X8,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>DrmFourcc::Abgr8888 =&gt; FormatCode::A8B8G8R8,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>DrmFourcc::Abgr8888 =&gt; FormatCode::R8G8B8A8,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>DrmFourcc::Rgbx8888 =&gt; FormatCode::R8G8B8X8,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>DrmFourcc::Rgbx8888 =&gt; FormatCode::X8B8G8R8,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>DrmFourcc::Rgba8888 =&gt; FormatCode::R8G8B8A8,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>DrmFourcc::Rgba8888 =&gt; FormatCode::A8B8G8R8,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>DrmFourcc::Bgrx8888 =&gt; FormatCode::B8G8R8X8,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>DrmFourcc::Bgrx8888 =&gt; FormatCode::X8R8G8B8,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>DrmFourcc::Bgra8888 =&gt; FormatCode::B8G8R8A8,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>DrmFourcc::Bgra8888 =&gt; FormatCode::A8R8G8B8,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>DrmFourcc::Xrgb2101010 =&gt; FormatCode::X2R10G10B10,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>DrmFourcc::Argb2101010 =&gt; FormatCode::A2R10G10B10,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>DrmFourcc::Xbgr2101010 =&gt; FormatCode::X2B10G10R10,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>DrmFourcc::Abgr2101010 =&gt; FormatCode::A2B10G10R10,
             other =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(UnsupportedDrmFourcc(other)),
         };
@@ -682,12 +682,12 @@
 }
 
 <span class="doccomment">/// The provided format code has no matching drm-fourcc
-</span><span class="attr">#[cfg(feature = <span class="string">&quot;drm-fourcc&quot;</span>)]
+</span><span class="attr">#[cfg(feature = <span class="string">"drm-fourcc"</span>)]
 #[derive(Debug, Error)]
-#[error(<span class="string">&quot;Unsupported format code {0:?}&quot;</span>)]
+#[error(<span class="string">"Unsupported format code {0:?}"</span>)]
 </span><span class="kw">pub struct </span>UnsupportedFormatCode(FormatCode);
 
-<span class="attr">#[cfg(feature = <span class="string">&quot;drm-fourcc&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"drm-fourcc"</span>)]
 </span><span class="kw">impl </span>TryFrom&lt;FormatCode&gt; <span class="kw">for </span>drm_fourcc::DrmFourcc {
     <span class="kw">type </span>Error = UnsupportedFormatCode;
 
@@ -695,59 +695,59 @@
         <span class="kw">use </span>drm_fourcc::DrmFourcc;
 
         <span class="kw">let </span>format = <span class="kw">match </span>value {
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>FormatCode::R5G6B5 =&gt; DrmFourcc::Rgb565,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>FormatCode::X8R8G8B8 =&gt; DrmFourcc::Xrgb8888,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>FormatCode::B8G8R8X8 =&gt; DrmFourcc::Xrgb8888,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>FormatCode::A8R8G8B8 =&gt; DrmFourcc::Argb8888,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>FormatCode::B8G8R8A8 =&gt; DrmFourcc::Argb8888,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>FormatCode::X8B8G8R8 =&gt; DrmFourcc::Xbgr8888,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>FormatCode::R8G8B8X8 =&gt; DrmFourcc::Xbgr8888,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>FormatCode::A8B8G8R8 =&gt; DrmFourcc::Abgr8888,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>FormatCode::R8G8B8A8 =&gt; DrmFourcc::Abgr8888,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>FormatCode::R8G8B8X8 =&gt; DrmFourcc::Rgbx8888,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>FormatCode::X8B8G8R8 =&gt; DrmFourcc::Rgbx8888,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>FormatCode::R8G8B8A8 =&gt; DrmFourcc::Rgba8888,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>FormatCode::A8B8G8R8 =&gt; DrmFourcc::Rgba8888,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>FormatCode::B8G8R8X8 =&gt; DrmFourcc::Bgrx8888,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>FormatCode::X8R8G8B8 =&gt; DrmFourcc::Bgrx8888,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>FormatCode::B8G8R8A8 =&gt; DrmFourcc::Bgra8888,
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;big&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"big"</span>)]
             </span>FormatCode::A8R8G8B8 =&gt; DrmFourcc::Bgra8888,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>FormatCode::X2R10G10B10 =&gt; DrmFourcc::Xrgb2101010,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>FormatCode::A2R10G10B10 =&gt; DrmFourcc::Argb2101010,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>FormatCode::X2B10G10R10 =&gt; DrmFourcc::Xbgr2101010,
 
-            <span class="attr">#[cfg(target_endian = <span class="string">&quot;little&quot;</span>)]
+            <span class="attr">#[cfg(target_endian = <span class="string">"little"</span>)]
             </span>FormatCode::A2B10G10R10 =&gt; DrmFourcc::Abgr2101010,
             other =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(UnsupportedFormatCode(other)),
         };

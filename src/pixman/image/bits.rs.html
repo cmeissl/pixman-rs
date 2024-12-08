@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pixman/src/image/bits.rs`."><title>bits.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="pixman" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pixman/src/image/bits.rs`."><title>bits.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="pixman" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../../../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pixman/image/</div>bits.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers">
+<a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -477,7 +478,31 @@
 <a href="#477" id="477">477</a>
 <a href="#478" id="478">478</a>
 <a href="#479" id="479">479</a>
-</pre></div><pre class="rust"><code><span class="kw">use </span>std::{ffi::c_int, marker::PhantomData, mem::MaybeUninit};
+<a href="#480" id="480">480</a>
+<a href="#481" id="481">481</a>
+<a href="#482" id="482">482</a>
+<a href="#483" id="483">483</a>
+<a href="#484" id="484">484</a>
+<a href="#485" id="485">485</a>
+<a href="#486" id="486">486</a>
+<a href="#487" id="487">487</a>
+<a href="#488" id="488">488</a>
+<a href="#489" id="489">489</a>
+<a href="#490" id="490">490</a>
+<a href="#491" id="491">491</a>
+<a href="#492" id="492">492</a>
+<a href="#493" id="493">493</a>
+<a href="#494" id="494">494</a>
+<a href="#495" id="495">495</a>
+<a href="#496" id="496">496</a>
+<a href="#497" id="497">497</a>
+<a href="#498" id="498">498</a>
+<a href="#499" id="499">499</a>
+<a href="#500" id="500">500</a>
+<a href="#501" id="501">501</a>
+<a href="#502" id="502">502</a>
+<a href="#503" id="503">503</a>
+<a href="#504" id="504">504</a></pre></div><pre class="rust"><code><span class="kw">use </span>std::{ffi::c_int, marker::PhantomData, mem::MaybeUninit};
 
 <span class="kw">use crate</span>::{
     ffi, Box32, Color, CreateFailed, Edge, Fixed, FormatCode, ImageRef, Operation, OperationFailed,
@@ -486,13 +511,25 @@
 
 <span class="doccomment">/// Image holding some pixel data
 </span><span class="attr">#[derive(Debug)]
-</span><span class="kw">pub struct </span>Image&lt;<span class="lifetime">&#39;bits</span>, <span class="lifetime">&#39;alpha</span>&gt; {
+</span><span class="kw">pub struct </span>Image&lt;<span class="lifetime">'bits</span>, <span class="lifetime">'alpha</span>&gt; {
     image: ImageRef,
-    _bits: PhantomData&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;bits </span>()&gt;,
-    _alpha: PhantomData&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;alpha </span>()&gt;,
+    _bits: PhantomData&lt;<span class="kw-2">&amp;</span><span class="lifetime">'bits </span>()&gt;,
+    _alpha: PhantomData&lt;<span class="kw-2">&amp;</span><span class="lifetime">'alpha </span>()&gt;,
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;bits</span>, <span class="lifetime">&#39;alpha</span>&gt; std::ops::Deref <span class="kw">for </span>Image&lt;<span class="lifetime">&#39;bits</span>, <span class="lifetime">&#39;alpha</span>&gt; {
+<span class="comment">// SAFETY: A reference to the image is only created by `set_alpha_map`.
+// Which returns a type with a lifetime bound, so `&amp;mut self` methods cannot
+// be called while this additional reference is in use.
+//
+// Thus the only mutability allowed is reference counting, which is made
+// thread-safe with the `REF_COUNT_LOCK` mutex, used when calling
+// `pixman_image_unref`, or `pixman_image_set_alpha_map`.
+</span><span class="attr">#[cfg(feature = <span class="string">"sync"</span>)]
+</span><span class="kw">unsafe impl </span>Send <span class="kw">for </span>Image&lt;<span class="lifetime">'_</span>, <span class="lifetime">'_</span>&gt; {}
+<span class="attr">#[cfg(feature = <span class="string">"sync"</span>)]
+</span><span class="kw">unsafe impl </span>Sync <span class="kw">for </span>Image&lt;<span class="lifetime">'_</span>, <span class="lifetime">'_</span>&gt; {}
+
+<span class="kw">impl </span>std::ops::Deref <span class="kw">for </span>Image&lt;<span class="lifetime">'_</span>, <span class="lifetime">'_</span>&gt; {
     <span class="kw">type </span>Target = ImageRef;
 
     <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Target {
@@ -500,7 +537,13 @@
     }
 }
 
-<span class="kw">impl </span>Image&lt;<span class="lifetime">&#39;static</span>, <span class="lifetime">&#39;static</span>&gt; {
+<span class="kw">impl </span>std::ops::DerefMut <span class="kw">for </span>Image&lt;<span class="lifetime">'_</span>, <span class="lifetime">'_</span>&gt; {
+    <span class="kw">fn </span>deref_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>::Target {
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>.image
+    }
+}
+
+<span class="kw">impl </span>Image&lt;<span class="lifetime">'static</span>, <span class="lifetime">'static</span>&gt; {
     <span class="doccomment">/// Create a new image with the specified format and size
     </span><span class="kw">pub fn </span>new(
         format: FormatCode,
@@ -538,13 +581,13 @@
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;bits</span>&gt; Image&lt;<span class="lifetime">&#39;bits</span>, <span class="lifetime">&#39;static</span>&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">'bits</span>&gt; Image&lt;<span class="lifetime">'bits</span>, <span class="lifetime">'static</span>&gt; {
     <span class="doccomment">/// Create an image from some pre-allocated pixel data
     </span><span class="kw">pub fn </span>from_slice_mut(
         format: FormatCode,
         width: usize,
         height: usize,
-        bits: <span class="kw-2">&amp;</span><span class="lifetime">&#39;bits </span><span class="kw-2">mut </span>[u32],
+        bits: <span class="kw-2">&amp;</span><span class="lifetime">'bits </span><span class="kw-2">mut </span>[u32],
         rowstride_bytes: usize,
         clear: bool,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, CreateFailed&gt; {
@@ -604,15 +647,17 @@
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;bits</span>, <span class="lifetime">&#39;a</span>&gt; Image&lt;<span class="lifetime">&#39;bits</span>, <span class="lifetime">&#39;a</span>&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">'bits</span>, <span class="lifetime">'a</span>&gt; Image&lt;<span class="lifetime">'bits</span>, <span class="lifetime">'a</span>&gt; {
     <span class="doccomment">/// Set an alpha map that will be used when this image is
     /// used as a src in a blit operation
-    </span><span class="kw">pub fn </span>set_alpha_map&lt;<span class="lifetime">&#39;alpha</span>: <span class="lifetime">&#39;a</span>&gt;(
+    </span><span class="kw">pub fn </span>set_alpha_map&lt;<span class="lifetime">'alpha</span>: <span class="lifetime">'a</span>&gt;(
         <span class="self">self</span>,
-        alpha_map: <span class="kw-2">&amp;</span><span class="lifetime">&#39;alpha </span>Image&lt;<span class="lifetime">&#39;_</span>, <span class="lifetime">&#39;static</span>&gt;,
+        alpha_map: <span class="kw-2">&amp;</span><span class="lifetime">'alpha </span>Image&lt;<span class="lifetime">'_</span>, <span class="lifetime">'static</span>&gt;,
         x: i16,
         y: i16,
-    ) -&gt; Image&lt;<span class="lifetime">&#39;bits</span>, <span class="lifetime">&#39;alpha</span>&gt; {
+    ) -&gt; Image&lt;<span class="lifetime">'bits</span>, <span class="lifetime">'alpha</span>&gt; {
+        <span class="attr">#[cfg(feature = <span class="string">"sync"</span>)]
+        </span><span class="kw">let </span>_lock = <span class="kw">crate</span>::REF_COUNT_LOCK.lock().unwrap();
         <span class="kw">unsafe </span>{
             ffi::pixman_image_set_alpha_map(<span class="self">self</span>.as_ptr(), alpha_map.as_ptr(), x, y);
         }
@@ -624,7 +669,9 @@
     }
 
     <span class="doccomment">/// Clear a previously set alpha map
-    </span><span class="kw">pub fn </span>clear_alpha_map(<span class="self">self</span>) -&gt; Image&lt;<span class="lifetime">&#39;bits</span>, <span class="lifetime">&#39;static</span>&gt; {
+    </span><span class="kw">pub fn </span>clear_alpha_map(<span class="self">self</span>) -&gt; Image&lt;<span class="lifetime">'bits</span>, <span class="lifetime">'static</span>&gt; {
+        <span class="attr">#[cfg(feature = <span class="string">"sync"</span>)]
+        </span><span class="kw">let </span>_lock = <span class="kw">crate</span>::REF_COUNT_LOCK.lock().unwrap();
         <span class="kw">unsafe </span>{
             ffi::pixman_image_set_alpha_map(<span class="self">self</span>.as_ptr(), std::ptr::null_mut(), <span class="number">0</span>, <span class="number">0</span>);
         }
@@ -636,7 +683,7 @@
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;bits</span>, <span class="lifetime">&#39;alpha</span>&gt; Image&lt;<span class="lifetime">&#39;bits</span>, <span class="lifetime">&#39;alpha</span>&gt; {
+<span class="kw">impl </span>Image&lt;<span class="lifetime">'_</span>, <span class="lifetime">'_</span>&gt; {
     <span class="doccomment">/// Get the width of the image
     </span><span class="kw">pub fn </span>width(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
         <span class="kw">unsafe </span>{ ffi::pixman_image_get_width(<span class="self">self</span>.as_ptr()) <span class="kw">as </span>usize }
@@ -674,7 +721,7 @@
 
     <span class="doccomment">/// Fill this image with the specified boxes and color
     </span><span class="kw">pub fn </span>fill_boxes(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         op: Operation,
         color: <span class="kw">impl </span>Into&lt;Color&gt;,
         boxes: <span class="kw-2">&amp;</span>[Box32],
@@ -698,7 +745,7 @@
 
     <span class="doccomment">/// Fill this image with the specified rectangles and color
     </span><span class="kw">pub fn </span>fill_rectangles(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         op: Operation,
         color: <span class="kw">impl </span>Into&lt;Color&gt;,
         rects: <span class="kw-2">&amp;</span>[Rectangle16],
@@ -723,7 +770,7 @@
     <span class="doccomment">/// Composite the specified src image into this image
     </span><span class="attr">#[allow(clippy::too_many_arguments)]
     </span><span class="kw">pub fn </span>composite(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         operation: Operation,
         src: <span class="kw-2">&amp;</span>ImageRef,
         mask: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ImageRef&gt;,
@@ -759,7 +806,7 @@
     <span class="doccomment">/// Composite the specified src image into this image
     </span><span class="attr">#[allow(clippy::too_many_arguments)]
     </span><span class="kw">pub fn </span>composite32(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         operation: Operation,
         src: <span class="kw-2">&amp;</span>ImageRef,
         mask: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ImageRef&gt;,
@@ -793,7 +840,7 @@
 
     <span class="doccomment">/// Composite the specified triangles into this image
     </span><span class="kw">pub fn </span>composite_triangles(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         operation: Operation,
         src: <span class="kw-2">&amp;</span>ImageRef,
         mask_format: FormatCode,
@@ -819,7 +866,7 @@
 
     <span class="doccomment">/// Composite the specified trapezoids into this image
     </span><span class="kw">pub fn </span>composite_trapezoids(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         operation: Operation,
         src: <span class="kw-2">&amp;</span>ImageRef,
         mask_format: FormatCode,
@@ -844,7 +891,7 @@
     }
 
     <span class="doccomment">/// Add the specified traps to this image
-    </span><span class="kw">pub fn </span>add_traps(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: (i16, i16), traps: <span class="kw-2">&amp;</span>[Trap]) {
+    </span><span class="kw">pub fn </span>add_traps(<span class="kw-2">&amp;mut </span><span class="self">self</span>, offset: (i16, i16), traps: <span class="kw-2">&amp;</span>[Trap]) {
         <span class="kw">unsafe </span>{
             ffi::pixman_add_traps(
                 <span class="self">self</span>.as_ptr(),
@@ -857,7 +904,7 @@
     }
 
     <span class="doccomment">/// Add the specified trapezoids to this image
-    </span><span class="kw">pub fn </span>add_trapezoids(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: (i16, i32), traps: <span class="kw-2">&amp;</span>[Trapezoid]) {
+    </span><span class="kw">pub fn </span>add_trapezoids(<span class="kw-2">&amp;mut </span><span class="self">self</span>, offset: (i16, i32), traps: <span class="kw-2">&amp;</span>[Trapezoid]) {
         <span class="kw">unsafe </span>{
             ffi::pixman_add_trapezoids(
                 <span class="self">self</span>.as_ptr(),
@@ -870,7 +917,7 @@
     }
 
     <span class="doccomment">/// Add the specified triangles to this image
-    </span><span class="kw">pub fn </span>add_triangles(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: (i32, i32), tris: <span class="kw-2">&amp;</span>[Triangle]) {
+    </span><span class="kw">pub fn </span>add_triangles(<span class="kw-2">&amp;mut </span><span class="self">self</span>, offset: (i32, i32), tris: <span class="kw-2">&amp;</span>[Triangle]) {
         <span class="kw">unsafe </span>{
             ffi::pixman_add_triangles(
                 <span class="self">self</span>.as_ptr(),
@@ -923,7 +970,7 @@
     }
 
     <span class="doccomment">/// Rasterize the specified edges
-    </span><span class="kw">pub fn </span>rasterize_edges(<span class="kw-2">&amp;</span><span class="self">self</span>, l: Edge, r: Edge, t: <span class="kw">impl </span>Into&lt;Fixed&gt;, b: <span class="kw">impl </span>Into&lt;Fixed&gt;) {
+    </span><span class="kw">pub fn </span>rasterize_edges(<span class="kw-2">&amp;mut </span><span class="self">self</span>, l: Edge, r: Edge, t: <span class="kw">impl </span>Into&lt;Fixed&gt;, b: <span class="kw">impl </span>Into&lt;Fixed&gt;) {
         <span class="kw">unsafe </span>{
             ffi::pixman_rasterize_edges(
                 <span class="self">self</span>.as_ptr(),
@@ -936,18 +983,21 @@
     }
 
     <span class="doccomment">/// Rasterize the specified trapezoids
-    </span><span class="kw">pub fn </span>rasterize_trapezoid(<span class="kw-2">&amp;</span><span class="self">self</span>, trap: Trapezoid, offset: (i32, i32)) {
+    </span><span class="kw">pub fn </span>rasterize_trapezoid(<span class="kw-2">&amp;mut </span><span class="self">self</span>, trap: Trapezoid, offset: (i32, i32)) {
         <span class="kw">unsafe </span>{ ffi::pixman_rasterize_trapezoid(<span class="self">self</span>.as_ptr(), trap.as_ptr(), offset.<span class="number">0</span>, offset.<span class="number">1</span>) }
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;bits</span>, <span class="lifetime">&#39;alpha</span>&gt; Image&lt;<span class="lifetime">&#39;bits</span>, <span class="lifetime">&#39;alpha</span>&gt; {
+<span class="kw">impl </span>Image&lt;<span class="lifetime">'_</span>, <span class="lifetime">'_</span>&gt; {
     <span class="doccomment">/// Initialize the image from a raw pointer
     ///
     /// # Safety
     ///
     /// The pointer is expected to be valid and have a ref-count of at least one.
     /// Ownership of the pointer is transferred and unref will be called on drop.
+    ///
+    /// Any other references to the `pixman_image_t` must not be mutated while this
+    /// `Image` exists, including changes to the reference count.
     </span><span class="kw">pub unsafe fn </span>from_ptr(ptr: <span class="kw-2">*mut </span>ffi::pixman_image_t) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             image: <span class="kw">unsafe </span>{ ImageRef::from_ptr(ptr) },

@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pixman-sys/src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pixman_sys" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pixman-sys/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pixman_sys" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pixman_sys/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers">
+<a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -1314,8 +1315,7 @@
 <a href="#1314" id="1314">1314</a>
 <a href="#1315" id="1315">1315</a>
 <a href="#1316" id="1316">1316</a>
-<a href="#1317" id="1317">1317</a>
-</pre></div><pre class="rust"><code><span class="attr">#![allow(non_upper_case_globals)]
+<a href="#1317" id="1317">1317</a></pre></div><pre class="rust"><code><span class="attr">#![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 
@@ -1511,13 +1511,13 @@
 <span class="kw">pub type </span>pixman_triangle_t = pixman_triangle;
 
 <span class="kw">pub type </span>pixman_read_memory_func_t = ::std::option::Option&lt;
-    <span class="kw">unsafe extern </span><span class="string">&quot;C&quot; </span><span class="kw">fn</span>(src: <span class="kw-2">*const </span>::std::os::raw::c_void, size: ::std::os::raw::c_int) -&gt; u32,
+    <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>(src: <span class="kw-2">*const </span>::std::os::raw::c_void, size: ::std::os::raw::c_int) -&gt; u32,
 &gt;;
 <span class="kw">pub type </span>pixman_write_memory_func_t = ::std::option::Option&lt;
-    <span class="kw">unsafe extern </span><span class="string">&quot;C&quot; </span><span class="kw">fn</span>(dst: <span class="kw-2">*mut </span>::std::os::raw::c_void, value: u32, size: ::std::os::raw::c_int),
+    <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>(dst: <span class="kw-2">*mut </span>::std::os::raw::c_void, value: u32, size: ::std::os::raw::c_int),
 &gt;;
 <span class="kw">pub type </span>pixman_image_destroy_func_t = ::std::option::Option&lt;
-    <span class="kw">unsafe extern </span><span class="string">&quot;C&quot; </span><span class="kw">fn</span>(image: <span class="kw-2">*mut </span>pixman_image_t, data: <span class="kw-2">*mut </span>::std::os::raw::c_void),
+    <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>(image: <span class="kw-2">*mut </span>pixman_image_t, data: <span class="kw-2">*mut </span>::std::os::raw::c_void),
 &gt;;
 
 <span class="attr">#[repr(C)]
@@ -1712,36 +1712,36 @@
     <span class="kw">pub </span>bot: pixman_span_fix_t,
 }
 
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_init_identity(matrix: <span class="kw-2">*mut </span>pixman_transform);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_point_3d(
         transform: <span class="kw-2">*const </span>pixman_transform,
         vector: <span class="kw-2">*mut </span>pixman_vector,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_point(
         transform: <span class="kw-2">*const </span>pixman_transform,
         vector: <span class="kw-2">*mut </span>pixman_vector,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_multiply(
         dst: <span class="kw-2">*mut </span>pixman_transform,
         l: <span class="kw-2">*const </span>pixman_transform,
         r: <span class="kw-2">*const </span>pixman_transform,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_init_scale(
         t: <span class="kw-2">*mut </span>pixman_transform,
         sx: pixman_fixed_t,
         sy: pixman_fixed_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_scale(
         forward: <span class="kw-2">*mut </span>pixman_transform,
         reverse: <span class="kw-2">*mut </span>pixman_transform,
@@ -1749,14 +1749,14 @@
         sy: pixman_fixed_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_init_rotate(
         t: <span class="kw-2">*mut </span>pixman_transform,
         cos: pixman_fixed_t,
         sin: pixman_fixed_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_rotate(
         forward: <span class="kw-2">*mut </span>pixman_transform,
         reverse: <span class="kw-2">*mut </span>pixman_transform,
@@ -1764,14 +1764,14 @@
         s: pixman_fixed_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_init_translate(
         t: <span class="kw-2">*mut </span>pixman_transform,
         tx: pixman_fixed_t,
         ty: pixman_fixed_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_translate(
         forward: <span class="kw-2">*mut </span>pixman_transform,
         reverse: <span class="kw-2">*mut </span>pixman_transform,
@@ -1779,71 +1779,71 @@
         ty: pixman_fixed_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_bounds(
         matrix: <span class="kw-2">*const </span>pixman_transform,
         b: <span class="kw-2">*mut </span>pixman_box16,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_invert(
         dst: <span class="kw-2">*mut </span>pixman_transform,
         src: <span class="kw-2">*const </span>pixman_transform,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_is_identity(t: <span class="kw-2">*const </span>pixman_transform) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_is_scale(t: <span class="kw-2">*const </span>pixman_transform) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_is_int_translate(t: <span class="kw-2">*const </span>pixman_transform) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_is_inverse(
         a: <span class="kw-2">*const </span>pixman_transform,
         b: <span class="kw-2">*const </span>pixman_transform,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_transform_from_pixman_f_transform(
         t: <span class="kw-2">*mut </span>pixman_transform,
         ft: <span class="kw-2">*const </span>pixman_f_transform,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_f_transform_from_pixman_transform(
         ft: <span class="kw-2">*mut </span>pixman_f_transform,
         t: <span class="kw-2">*const </span>pixman_transform,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_f_transform_invert(
         dst: <span class="kw-2">*mut </span>pixman_f_transform,
         src: <span class="kw-2">*const </span>pixman_f_transform,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_f_transform_point(
         t: <span class="kw-2">*const </span>pixman_f_transform,
         v: <span class="kw-2">*mut </span>pixman_f_vector,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_f_transform_point_3d(t: <span class="kw-2">*const </span>pixman_f_transform, v: <span class="kw-2">*mut </span>pixman_f_vector);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_f_transform_multiply(
         dst: <span class="kw-2">*mut </span>pixman_f_transform,
         l: <span class="kw-2">*const </span>pixman_f_transform,
         r: <span class="kw-2">*const </span>pixman_f_transform,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_f_transform_init_scale(t: <span class="kw-2">*mut </span>pixman_f_transform, sx: f64, sy: f64);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_f_transform_scale(
         forward: <span class="kw-2">*mut </span>pixman_f_transform,
         reverse: <span class="kw-2">*mut </span>pixman_f_transform,
@@ -1851,10 +1851,10 @@
         sy: f64,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_f_transform_init_rotate(t: <span class="kw-2">*mut </span>pixman_f_transform, cos: f64, sin: f64);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_f_transform_rotate(
         forward: <span class="kw-2">*mut </span>pixman_f_transform,
         reverse: <span class="kw-2">*mut </span>pixman_f_transform,
@@ -1862,10 +1862,10 @@
         s: f64,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_f_transform_init_translate(t: <span class="kw-2">*mut </span>pixman_f_transform, tx: f64, ty: f64);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_f_transform_translate(
         forward: <span class="kw-2">*mut </span>pixman_f_transform,
         reverse: <span class="kw-2">*mut </span>pixman_f_transform,
@@ -1873,26 +1873,26 @@
         ty: f64,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_f_transform_bounds(
         t: <span class="kw-2">*const </span>pixman_f_transform,
         b: <span class="kw-2">*mut </span>pixman_box16,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_f_transform_init_identity(t: <span class="kw-2">*mut </span>pixman_f_transform);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_set_static_pointers(
         empty_box: <span class="kw-2">*mut </span>pixman_box16_t,
         empty_data: <span class="kw-2">*mut </span>pixman_region16_data_t,
         broken_data: <span class="kw-2">*mut </span>pixman_region16_data_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_init(region: <span class="kw-2">*mut </span>pixman_region16_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_init_rect(
         region: <span class="kw-2">*mut </span>pixman_region16_t,
         x: ::std::os::raw::c_int,
@@ -1901,56 +1901,56 @@
         height: ::std::os::raw::c_uint,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_init_rects(
         region: <span class="kw-2">*mut </span>pixman_region16_t,
         boxes: <span class="kw-2">*const </span>pixman_box16_t,
         count: ::std::os::raw::c_int,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_init_with_extents(
         region: <span class="kw-2">*mut </span>pixman_region16_t,
         extents: <span class="kw-2">*const </span>pixman_box16_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_init_from_image(
         region: <span class="kw-2">*mut </span>pixman_region16_t,
         image: <span class="kw-2">*mut </span>pixman_image_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_fini(region: <span class="kw-2">*mut </span>pixman_region16_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_translate(
         region: <span class="kw-2">*mut </span>pixman_region16_t,
         x: ::std::os::raw::c_int,
         y: ::std::os::raw::c_int,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_copy(
         dest: <span class="kw-2">*mut </span>pixman_region16_t,
         source: <span class="kw-2">*const </span>pixman_region16_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_intersect(
         new_reg: <span class="kw-2">*mut </span>pixman_region16_t,
         reg1: <span class="kw-2">*const </span>pixman_region16_t,
         reg2: <span class="kw-2">*const </span>pixman_region16_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_union(
         new_reg: <span class="kw-2">*mut </span>pixman_region16_t,
         reg1: <span class="kw-2">*const </span>pixman_region16_t,
         reg2: <span class="kw-2">*const </span>pixman_region16_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_union_rect(
         dest: <span class="kw-2">*mut </span>pixman_region16_t,
         source: <span class="kw-2">*const </span>pixman_region16_t,
@@ -1960,7 +1960,7 @@
         height: ::std::os::raw::c_uint,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_intersect_rect(
         dest: <span class="kw-2">*mut </span>pixman_region16_t,
         source: <span class="kw-2">*const </span>pixman_region16_t,
@@ -1970,21 +1970,21 @@
         height: ::std::os::raw::c_uint,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_subtract(
         reg_d: <span class="kw-2">*mut </span>pixman_region16_t,
         reg_m: <span class="kw-2">*const </span>pixman_region16_t,
         reg_s: <span class="kw-2">*const </span>pixman_region16_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_inverse(
         new_reg: <span class="kw-2">*mut </span>pixman_region16_t,
         reg1: <span class="kw-2">*const </span>pixman_region16_t,
         inv_rect: <span class="kw-2">*const </span>pixman_box16_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_contains_point(
         region: <span class="kw-2">*const </span>pixman_region16_t,
         x: ::std::os::raw::c_int,
@@ -1992,46 +1992,46 @@
         box_: <span class="kw-2">*mut </span>pixman_box16_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_contains_rectangle(
         region: <span class="kw-2">*const </span>pixman_region16_t,
         prect: <span class="kw-2">*const </span>pixman_box16_t,
     ) -&gt; pixman_region_overlap_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_not_empty(region: <span class="kw-2">*const </span>pixman_region16_t) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_extents(region: <span class="kw-2">*const </span>pixman_region16_t) -&gt; <span class="kw-2">*mut </span>pixman_box16_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_n_rects(region: <span class="kw-2">*const </span>pixman_region16_t) -&gt; ::std::os::raw::c_int;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_rectangles(
         region: <span class="kw-2">*const </span>pixman_region16_t,
         n_rects: <span class="kw-2">*mut </span>::std::os::raw::c_int,
     ) -&gt; <span class="kw-2">*mut </span>pixman_box16_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_equal(
         region1: <span class="kw-2">*const </span>pixman_region16_t,
         region2: <span class="kw-2">*const </span>pixman_region16_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_selfcheck(region: <span class="kw-2">*mut </span>pixman_region16_t) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_reset(region: <span class="kw-2">*mut </span>pixman_region16_t, box_: <span class="kw-2">*const </span>pixman_box16_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region_clear(region: <span class="kw-2">*mut </span>pixman_region16_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_init(region: <span class="kw-2">*mut </span>pixman_region32_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_init_rect(
         region: <span class="kw-2">*mut </span>pixman_region32_t,
         x: ::std::os::raw::c_int,
@@ -2040,56 +2040,56 @@
         height: ::std::os::raw::c_uint,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_init_rects(
         region: <span class="kw-2">*mut </span>pixman_region32_t,
         boxes: <span class="kw-2">*const </span>pixman_box32_t,
         count: ::std::os::raw::c_int,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_init_with_extents(
         region: <span class="kw-2">*mut </span>pixman_region32_t,
         extents: <span class="kw-2">*const </span>pixman_box32_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_init_from_image(
         region: <span class="kw-2">*mut </span>pixman_region32_t,
         image: <span class="kw-2">*mut </span>pixman_image_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_fini(region: <span class="kw-2">*mut </span>pixman_region32_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_translate(
         region: <span class="kw-2">*mut </span>pixman_region32_t,
         x: ::std::os::raw::c_int,
         y: ::std::os::raw::c_int,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_copy(
         dest: <span class="kw-2">*mut </span>pixman_region32_t,
         source: <span class="kw-2">*const </span>pixman_region32_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_intersect(
         new_reg: <span class="kw-2">*mut </span>pixman_region32_t,
         reg1: <span class="kw-2">*const </span>pixman_region32_t,
         reg2: <span class="kw-2">*const </span>pixman_region32_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_union(
         new_reg: <span class="kw-2">*mut </span>pixman_region32_t,
         reg1: <span class="kw-2">*const </span>pixman_region32_t,
         reg2: <span class="kw-2">*const </span>pixman_region32_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_intersect_rect(
         dest: <span class="kw-2">*mut </span>pixman_region32_t,
         source: <span class="kw-2">*const </span>pixman_region32_t,
@@ -2099,7 +2099,7 @@
         height: ::std::os::raw::c_uint,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_union_rect(
         dest: <span class="kw-2">*mut </span>pixman_region32_t,
         source: <span class="kw-2">*const </span>pixman_region32_t,
@@ -2109,21 +2109,21 @@
         height: ::std::os::raw::c_uint,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_subtract(
         reg_d: <span class="kw-2">*mut </span>pixman_region32_t,
         reg_m: <span class="kw-2">*const </span>pixman_region32_t,
         reg_s: <span class="kw-2">*const </span>pixman_region32_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_inverse(
         new_reg: <span class="kw-2">*mut </span>pixman_region32_t,
         reg1: <span class="kw-2">*const </span>pixman_region32_t,
         inv_rect: <span class="kw-2">*const </span>pixman_box32_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_contains_point(
         region: <span class="kw-2">*const </span>pixman_region32_t,
         x: ::std::os::raw::c_int,
@@ -2131,43 +2131,43 @@
         box_: <span class="kw-2">*mut </span>pixman_box32_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_contains_rectangle(
         region: <span class="kw-2">*const </span>pixman_region32_t,
         prect: <span class="kw-2">*const </span>pixman_box32_t,
     ) -&gt; pixman_region_overlap_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_not_empty(region: <span class="kw-2">*const </span>pixman_region32_t) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_extents(region: <span class="kw-2">*const </span>pixman_region32_t) -&gt; <span class="kw-2">*mut </span>pixman_box32_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_n_rects(region: <span class="kw-2">*const </span>pixman_region32_t) -&gt; ::std::os::raw::c_int;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_rectangles(
         region: <span class="kw-2">*const </span>pixman_region32_t,
         n_rects: <span class="kw-2">*mut </span>::std::os::raw::c_int,
     ) -&gt; <span class="kw-2">*mut </span>pixman_box32_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_equal(
         region1: <span class="kw-2">*const </span>pixman_region32_t,
         region2: <span class="kw-2">*const </span>pixman_region32_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_selfcheck(region: <span class="kw-2">*mut </span>pixman_region32_t) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_reset(region: <span class="kw-2">*mut </span>pixman_region32_t, box_: <span class="kw-2">*const </span>pixman_box32_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_region32_clear(region: <span class="kw-2">*mut </span>pixman_region32_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_blt(
         src_bits: <span class="kw-2">*mut </span>u32,
         dst_bits: <span class="kw-2">*mut </span>u32,
@@ -2183,7 +2183,7 @@
         height: ::std::os::raw::c_int,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_fill(
         bits: <span class="kw-2">*mut </span>u32,
         stride: ::std::os::raw::c_int,
@@ -2195,22 +2195,22 @@
         _xor: u32,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_version() -&gt; ::std::os::raw::c_int;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_version_string() -&gt; <span class="kw-2">*const </span>::std::os::raw::c_char;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_format_supported_destination(format: pixman_format_code_t) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_format_supported_source(format: pixman_format_code_t) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_create_solid_fill(color: <span class="kw-2">*const </span>pixman_color_t) -&gt; <span class="kw-2">*mut </span>pixman_image_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_create_linear_gradient(
         p1: <span class="kw-2">*const </span>pixman_point_fixed_t,
         p2: <span class="kw-2">*const </span>pixman_point_fixed_t,
@@ -2218,7 +2218,7 @@
         n_stops: ::std::os::raw::c_int,
     ) -&gt; <span class="kw-2">*mut </span>pixman_image_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_create_radial_gradient(
         inner: <span class="kw-2">*const </span>pixman_point_fixed_t,
         outer: <span class="kw-2">*const </span>pixman_point_fixed_t,
@@ -2228,7 +2228,7 @@
         n_stops: ::std::os::raw::c_int,
     ) -&gt; <span class="kw-2">*mut </span>pixman_image_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_create_conical_gradient(
         center: <span class="kw-2">*const </span>pixman_point_fixed_t,
         angle: pixman_fixed_t,
@@ -2236,7 +2236,7 @@
         n_stops: ::std::os::raw::c_int,
     ) -&gt; <span class="kw-2">*mut </span>pixman_image_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_create_bits(
         format: pixman_format_code_t,
         width: ::std::os::raw::c_int,
@@ -2245,7 +2245,7 @@
         rowstride_bytes: ::std::os::raw::c_int,
     ) -&gt; <span class="kw-2">*mut </span>pixman_image_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_create_bits_no_clear(
         format: pixman_format_code_t,
         width: ::std::os::raw::c_int,
@@ -2254,58 +2254,58 @@
         rowstride_bytes: ::std::os::raw::c_int,
     ) -&gt; <span class="kw-2">*mut </span>pixman_image_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_ref(image: <span class="kw-2">*mut </span>pixman_image_t) -&gt; <span class="kw-2">*mut </span>pixman_image_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_unref(image: <span class="kw-2">*mut </span>pixman_image_t) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_set_destroy_function(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         function: pixman_image_destroy_func_t,
         data: <span class="kw-2">*mut </span>::std::os::raw::c_void,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_get_destroy_data(image: <span class="kw-2">*mut </span>pixman_image_t)
         -&gt; <span class="kw-2">*mut </span>::std::os::raw::c_void;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_set_clip_region(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         region: <span class="kw-2">*const </span>pixman_region16_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_set_clip_region32(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         region: <span class="kw-2">*const </span>pixman_region32_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_set_has_client_clip(image: <span class="kw-2">*mut </span>pixman_image_t, clien_clip: pixman_bool_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_set_transform(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         transform: <span class="kw-2">*const </span>pixman_transform_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_set_repeat(image: <span class="kw-2">*mut </span>pixman_image_t, repeat: pixman_repeat_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_set_dither(image: <span class="kw-2">*mut </span>pixman_image_t, dither: pixman_dither_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_set_dither_offset(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         offset_x: ::std::os::raw::c_int,
         offset_y: ::std::os::raw::c_int,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_set_filter(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         filter: pixman_filter_t,
@@ -2313,13 +2313,13 @@
         n_filter_params: ::std::os::raw::c_int,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_set_source_clipping(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         source_clipping: pixman_bool_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_set_alpha_map(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         alpha_map: <span class="kw-2">*mut </span>pixman_image_t,
@@ -2327,44 +2327,44 @@
         y: i16,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_set_component_alpha(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         component_alpha: pixman_bool_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_get_component_alpha(image: <span class="kw-2">*mut </span>pixman_image_t) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_set_accessors(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         read_func: pixman_read_memory_func_t,
         write_func: pixman_write_memory_func_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_set_indexed(image: <span class="kw-2">*mut </span>pixman_image_t, indexed: <span class="kw-2">*const </span>pixman_indexed_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_get_data(image: <span class="kw-2">*mut </span>pixman_image_t) -&gt; <span class="kw-2">*mut </span>u32;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_get_width(image: <span class="kw-2">*mut </span>pixman_image_t) -&gt; ::std::os::raw::c_int;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_get_height(image: <span class="kw-2">*mut </span>pixman_image_t) -&gt; ::std::os::raw::c_int;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_get_stride(image: <span class="kw-2">*mut </span>pixman_image_t) -&gt; ::std::os::raw::c_int;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_get_depth(image: <span class="kw-2">*mut </span>pixman_image_t) -&gt; ::std::os::raw::c_int;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_get_format(image: <span class="kw-2">*mut </span>pixman_image_t) -&gt; pixman_format_code_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_filter_create_separable_convolution(
         n_values: <span class="kw-2">*mut </span>::std::os::raw::c_int,
         scale_x: pixman_fixed_t,
@@ -2377,7 +2377,7 @@
         subsample_bits_y: ::std::os::raw::c_int,
     ) -&gt; <span class="kw-2">*mut </span>pixman_fixed_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_fill_rectangles(
         op: pixman_op_t,
         image: <span class="kw-2">*mut </span>pixman_image_t,
@@ -2386,7 +2386,7 @@
         rects: <span class="kw-2">*const </span>pixman_rectangle16_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_fill_boxes(
         op: pixman_op_t,
         dest: <span class="kw-2">*mut </span>pixman_image_t,
@@ -2395,7 +2395,7 @@
         boxes: <span class="kw-2">*const </span>pixman_box32_t,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_compute_composite_region(
         region: <span class="kw-2">*mut </span>pixman_region16_t,
         src_image: <span class="kw-2">*mut </span>pixman_image_t,
@@ -2411,7 +2411,7 @@
         height: u16,
     ) -&gt; pixman_bool_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_composite(
         op: pixman_op_t,
         src: <span class="kw-2">*mut </span>pixman_image_t,
@@ -2427,7 +2427,7 @@
         height: u16,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_image_composite32(
         op: pixman_op_t,
         src: <span class="kw-2">*mut </span>pixman_image_t,
@@ -2443,29 +2443,29 @@
         height: i32,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_disable_out_of_bounds_workaround();
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_glyph_cache_create() -&gt; <span class="kw-2">*mut </span>pixman_glyph_cache_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_glyph_cache_destroy(cache: <span class="kw-2">*mut </span>pixman_glyph_cache_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_glyph_cache_freeze(cache: <span class="kw-2">*mut </span>pixman_glyph_cache_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_glyph_cache_thaw(cache: <span class="kw-2">*mut </span>pixman_glyph_cache_t);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_glyph_cache_lookup(
         cache: <span class="kw-2">*mut </span>pixman_glyph_cache_t,
         font_key: <span class="kw-2">*mut </span>::std::os::raw::c_void,
         glyph_key: <span class="kw-2">*mut </span>::std::os::raw::c_void,
     ) -&gt; <span class="kw-2">*const </span>::std::os::raw::c_void;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_glyph_cache_insert(
         cache: <span class="kw-2">*mut </span>pixman_glyph_cache_t,
         font_key: <span class="kw-2">*mut </span>::std::os::raw::c_void,
@@ -2475,14 +2475,14 @@
         glyph_image: <span class="kw-2">*mut </span>pixman_image_t,
     ) -&gt; <span class="kw-2">*const </span>::std::os::raw::c_void;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_glyph_cache_remove(
         cache: <span class="kw-2">*mut </span>pixman_glyph_cache_t,
         font_key: <span class="kw-2">*mut </span>::std::os::raw::c_void,
         glyph_key: <span class="kw-2">*mut </span>::std::os::raw::c_void,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_glyph_get_extents(
         cache: <span class="kw-2">*mut </span>pixman_glyph_cache_t,
         n_glyphs: ::std::os::raw::c_int,
@@ -2490,14 +2490,14 @@
         extents: <span class="kw-2">*mut </span>pixman_box32_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_glyph_get_mask_format(
         cache: <span class="kw-2">*mut </span>pixman_glyph_cache_t,
         n_glyphs: ::std::os::raw::c_int,
         glyphs: <span class="kw-2">*const </span>pixman_glyph_t,
     ) -&gt; pixman_format_code_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_composite_glyphs(
         op: pixman_op_t,
         src: <span class="kw-2">*mut </span>pixman_image_t,
@@ -2516,7 +2516,7 @@
         glyphs: <span class="kw-2">*const </span>pixman_glyph_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_composite_glyphs_no_mask(
         op: pixman_op_t,
         src: <span class="kw-2">*mut </span>pixman_image_t,
@@ -2530,16 +2530,16 @@
         glyphs: <span class="kw-2">*const </span>pixman_glyph_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_sample_ceil_y(y: pixman_fixed_t, bpp: ::std::os::raw::c_int) -&gt; pixman_fixed_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_sample_floor_y(y: pixman_fixed_t, bpp: ::std::os::raw::c_int) -&gt; pixman_fixed_t;
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_edge_step(e: <span class="kw-2">*mut </span>pixman_edge_t, n: ::std::os::raw::c_int);
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_edge_init(
         e: <span class="kw-2">*mut </span>pixman_edge_t,
         bpp: ::std::os::raw::c_int,
@@ -2550,7 +2550,7 @@
         y_bot: pixman_fixed_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_line_fixed_edge_init(
         e: <span class="kw-2">*mut </span>pixman_edge_t,
         bpp: ::std::os::raw::c_int,
@@ -2560,7 +2560,7 @@
         y_off: ::std::os::raw::c_int,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_rasterize_edges(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         l: <span class="kw-2">*mut </span>pixman_edge_t,
@@ -2569,7 +2569,7 @@
         b: pixman_fixed_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_add_traps(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         x_off: i16,
@@ -2578,7 +2578,7 @@
         traps: <span class="kw-2">*const </span>pixman_trap_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_add_trapezoids(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         x_off: i16,
@@ -2587,7 +2587,7 @@
         traps: <span class="kw-2">*const </span>pixman_trapezoid_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_rasterize_trapezoid(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         trap: <span class="kw-2">*const </span>pixman_trapezoid_t,
@@ -2595,7 +2595,7 @@
         y_off: ::std::os::raw::c_int,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_composite_trapezoids(
         op: pixman_op_t,
         src: <span class="kw-2">*mut </span>pixman_image_t,
@@ -2609,7 +2609,7 @@
         traps: <span class="kw-2">*const </span>pixman_trapezoid_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_composite_triangles(
         op: pixman_op_t,
         src: <span class="kw-2">*mut </span>pixman_image_t,
@@ -2623,7 +2623,7 @@
         tris: <span class="kw-2">*const </span>pixman_triangle_t,
     );
 }
-<span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+<span class="kw">extern </span><span class="string">"C" </span>{
     <span class="kw">pub fn </span>pixman_add_triangles(
         image: <span class="kw-2">*mut </span>pixman_image_t,
         x_off: i32,

@@ -1,0 +1,9 @@
+(function() {
+    var implementors = Object.fromEntries([["pixman",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.83.0/core/ops/deref/trait.DerefMut.html\" title=\"trait core::ops::deref::DerefMut\">DerefMut</a> for <a class=\"struct\" href=\"pixman/struct.Image.html\" title=\"struct pixman::Image\">Image</a>&lt;'_, '_&gt;"],["impl&lt;'alpha&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.83.0/core/ops/deref/trait.DerefMut.html\" title=\"trait core::ops::deref::DerefMut\">DerefMut</a> for <a class=\"struct\" href=\"pixman/struct.ConicalGradient.html\" title=\"struct pixman::ConicalGradient\">ConicalGradient</a>&lt;'alpha&gt;"],["impl&lt;'alpha&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.83.0/core/ops/deref/trait.DerefMut.html\" title=\"trait core::ops::deref::DerefMut\">DerefMut</a> for <a class=\"struct\" href=\"pixman/struct.LinearGradient.html\" title=\"struct pixman::LinearGradient\">LinearGradient</a>&lt;'alpha&gt;"],["impl&lt;'alpha&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.83.0/core/ops/deref/trait.DerefMut.html\" title=\"trait core::ops::deref::DerefMut\">DerefMut</a> for <a class=\"struct\" href=\"pixman/struct.RadialGradient.html\" title=\"struct pixman::RadialGradient\">RadialGradient</a>&lt;'alpha&gt;"],["impl&lt;'alpha&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.83.0/core/ops/deref/trait.DerefMut.html\" title=\"trait core::ops::deref::DerefMut\">DerefMut</a> for <a class=\"struct\" href=\"pixman/struct.Solid.html\" title=\"struct pixman::Solid\">Solid</a>&lt;'alpha&gt;"]]]]);
+    if (window.register_implementors) {
+        window.register_implementors(implementors);
+    } else {
+        window.pending_implementors = implementors;
+    }
+})()
+//{"start":57,"fragment_lengths":[1522]}

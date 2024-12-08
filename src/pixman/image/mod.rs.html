@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pixman/src/image/mod.rs`."><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="pixman" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pixman/src/image/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="pixman" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../../../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pixman/image/</div>mod.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers">
+<a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -251,7 +252,21 @@
 <a href="#251" id="251">251</a>
 <a href="#252" id="252">252</a>
 <a href="#253" id="253">253</a>
-</pre></div><pre class="rust"><code><span class="kw">use </span>std::os::raw::c_int;
+<a href="#254" id="254">254</a>
+<a href="#255" id="255">255</a>
+<a href="#256" id="256">256</a>
+<a href="#257" id="257">257</a>
+<a href="#258" id="258">258</a>
+<a href="#259" id="259">259</a>
+<a href="#260" id="260">260</a>
+<a href="#261" id="261">261</a>
+<a href="#262" id="262">262</a>
+<a href="#263" id="263">263</a>
+<a href="#264" id="264">264</a>
+<a href="#265" id="265">265</a>
+<a href="#266" id="266">266</a>
+<a href="#267" id="267">267</a>
+<a href="#268" id="268">268</a></pre></div><pre class="rust"><code><span class="kw">use </span>std::os::raw::c_int;
 
 <span class="kw">use </span>pixman_sys <span class="kw">as </span>ffi;
 <span class="kw">use </span>thiserror::Error;
@@ -274,7 +289,7 @@
 
 <span class="doccomment">/// Resource creation failed
 </span><span class="attr">#[derive(Debug, Error)]
-#[error(<span class="string">&quot;Resource creation failed&quot;</span>)]
+#[error(<span class="string">"Resource creation failed"</span>)]
 </span><span class="kw">pub struct </span>CreateFailed;
 
 <span class="doccomment">/// A reference to a raw image
@@ -283,14 +298,17 @@
 
 <span class="kw">impl </span>ImageRef {
     <span class="doccomment">/// Set the repeat operation for this image
-    </span><span class="kw">pub fn </span>set_repeat(<span class="kw-2">&amp;</span><span class="self">self</span>, repeat: Repeat) {
+    </span><span class="kw">pub fn </span>set_repeat(<span class="kw-2">&amp;mut </span><span class="self">self</span>, repeat: Repeat) {
         <span class="kw">unsafe </span>{
             ffi::pixman_image_set_repeat(<span class="self">self</span>.<span class="number">0</span>, repeat.into());
         }
     }
 
     <span class="doccomment">/// Apply the specified transform during sampling from this image
-    </span><span class="kw">pub fn </span>set_transform(<span class="kw-2">&amp;</span><span class="self">self</span>, transform: <span class="kw">impl </span>Into&lt;Transform&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), OperationFailed&gt; {
+    </span><span class="kw">pub fn </span>set_transform(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        transform: <span class="kw">impl </span>Into&lt;Transform&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), OperationFailed&gt; {
         <span class="kw">let </span>transform = transform.into();
         <span class="kw">let </span>res = <span class="kw">unsafe </span>{ ffi::pixman_image_set_transform(<span class="self">self</span>.<span class="number">0</span>, transform.as_ptr()) };
         <span class="kw">if </span>res == <span class="number">1 </span>{
@@ -311,7 +329,7 @@
     }
 
     <span class="doccomment">/// Apply a clip region used during composition
-    </span><span class="kw">pub fn </span>set_clip_region(<span class="kw-2">&amp;</span><span class="self">self</span>, region: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Region16&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), OperationFailed&gt; {
+    </span><span class="kw">pub fn </span>set_clip_region(<span class="kw-2">&amp;mut </span><span class="self">self</span>, region: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Region16&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), OperationFailed&gt; {
         <span class="kw">let </span>region = <span class="kw">if let </span><span class="prelude-val">Some</span>(region) = region {
             region.as_ptr()
         } <span class="kw">else </span>{
@@ -326,7 +344,7 @@
     }
 
     <span class="doccomment">/// Apply a clip region used during composition
-    </span><span class="kw">pub fn </span>set_clip_region32(<span class="kw-2">&amp;</span><span class="self">self</span>, region: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Region32&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), OperationFailed&gt; {
+    </span><span class="kw">pub fn </span>set_clip_region32(<span class="kw-2">&amp;mut </span><span class="self">self</span>, region: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Region32&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), OperationFailed&gt; {
         <span class="kw">let </span>region = <span class="kw">if let </span><span class="prelude-val">Some</span>(region) = region {
             region.as_ptr()
         } <span class="kw">else </span>{
@@ -341,20 +359,20 @@
     }
 
     <span class="doccomment">/// Set the dither operation used during composition
-    </span><span class="kw">pub fn </span>set_dither(<span class="kw-2">&amp;</span><span class="self">self</span>, dither: Dither) {
+    </span><span class="kw">pub fn </span>set_dither(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dither: Dither) {
         <span class="kw">unsafe </span>{
             ffi::pixman_image_set_dither(<span class="self">self</span>.<span class="number">0</span>, dither.into());
         }
     }
 
     <span class="doccomment">/// Set the dither offset
-    </span><span class="kw">pub fn </span>set_dither_offset(<span class="kw-2">&amp;</span><span class="self">self</span>, offset_x: c_int, offset_y: c_int) {
+    </span><span class="kw">pub fn </span>set_dither_offset(<span class="kw-2">&amp;mut </span><span class="self">self</span>, offset_x: c_int, offset_y: c_int) {
         <span class="kw">unsafe </span>{ ffi::pixman_image_set_dither_offset(<span class="self">self</span>.<span class="number">0</span>, offset_x, offset_y) }
     }
 
     <span class="doccomment">/// Set the filter operation used during composition
     </span><span class="kw">pub fn </span>set_filter(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         filter: Filter,
         filter_params: <span class="kw-2">&amp;</span>[Fixed],
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(), OperationFailed&gt; {
@@ -374,7 +392,7 @@
     }
 
     <span class="doccomment">/// Set whether the source clip was set by a client
-    </span><span class="kw">pub fn </span>set_has_client_clip(<span class="kw-2">&amp;</span><span class="self">self</span>, client_clip: bool) {
+    </span><span class="kw">pub fn </span>set_has_client_clip(<span class="kw-2">&amp;mut </span><span class="self">self</span>, client_clip: bool) {
         <span class="kw">let </span>client_clip = <span class="kw">if </span>client_clip { <span class="number">1 </span>} <span class="kw">else </span>{ <span class="number">0 </span>};
         <span class="kw">unsafe </span>{
             ffi::pixman_image_set_has_client_clip(<span class="self">self</span>.<span class="number">0</span>, client_clip);
@@ -385,7 +403,7 @@
     //pub fn set_indexed(&amp;mut self)
 
     </span><span class="doccomment">/// Set whether the clip applies when the image is used as a source
-    </span><span class="kw">pub fn </span>set_source_clipping(<span class="kw-2">&amp;</span><span class="self">self</span>, source_clipping: bool) {
+    </span><span class="kw">pub fn </span>set_source_clipping(<span class="kw-2">&amp;mut </span><span class="self">self</span>, source_clipping: bool) {
         <span class="kw">let </span>source_clipping = <span class="kw">if </span>source_clipping { <span class="number">1 </span>} <span class="kw">else </span>{ <span class="number">0 </span>};
         <span class="kw">unsafe </span>{
             ffi::pixman_image_set_source_clipping(<span class="self">self</span>.<span class="number">0</span>, source_clipping);
@@ -398,7 +416,7 @@
     }
 
     <span class="doccomment">/// Set whether the image has component alpha or unified alpha
-    </span><span class="kw">pub fn </span>set_component_alpha(<span class="kw-2">&amp;</span><span class="self">self</span>, component_alpha: bool) {
+    </span><span class="kw">pub fn </span>set_component_alpha(<span class="kw-2">&amp;mut </span><span class="self">self</span>, component_alpha: bool) {
         <span class="kw">let </span>component_alpha = <span class="kw">if </span>component_alpha { <span class="number">1 </span>} <span class="kw">else </span>{ <span class="number">0 </span>};
         <span class="kw">unsafe </span>{ ffi::pixman_image_set_component_alpha(<span class="self">self</span>.<span class="number">0</span>, component_alpha) }
     }
@@ -424,29 +442,33 @@
 
 <span class="kw">impl </span>Drop <span class="kw">for </span>ImageRef {
     <span class="kw">fn </span>drop(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="attr">#[cfg(feature = <span class="string">"sync"</span>)]
+        </span><span class="kw">let </span>_lock = <span class="kw">crate</span>::REF_COUNT_LOCK.lock().unwrap();
         <span class="kw">unsafe </span>{
             ffi::pixman_image_unref(<span class="self">self</span>.<span class="number">0</span>);
         }
     }
 }
 
-<span class="macro">macro_rules! </span>image_type {
+<span class="macro">macro_rules!</span> image_type {
     ($(<span class="attr">#[<span class="macro-nonterminal">$attr</span>:meta]</span>)* <span class="macro-nonterminal">$name</span>:ident) =&gt; {
         $(<span class="attr">#[<span class="macro-nonterminal">$attr</span>]</span>)*
-        <span class="kw">pub struct </span><span class="macro-nonterminal">$name</span>&lt;<span class="lifetime">&#39;alpha</span>&gt; {
+        <span class="kw">pub struct </span><span class="macro-nonterminal">$name</span>&lt;<span class="lifetime">'alpha</span>&gt; {
             image: <span class="macro-nonterminal">$crate::ImageRef</span>,
-            _phantom: std::marker::PhantomData&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;alpha </span>()&gt;,
+            _phantom: std::marker::PhantomData&lt;<span class="kw-2">&amp;</span><span class="lifetime">'alpha </span>()&gt;,
         }
 
-        <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; <span class="macro-nonterminal">$name</span>&lt;<span class="lifetime">&#39;a</span>&gt; {
+        <span class="kw">impl</span>&lt;<span class="lifetime">'a</span>&gt; <span class="macro-nonterminal">$name</span>&lt;<span class="lifetime">'a</span>&gt; {
             <span class="doccomment">/// Set an alpha map that will be used when this image is
             /// used as a src in a blit operation
-            </span><span class="kw">pub fn </span>set_alpha_map&lt;<span class="lifetime">&#39;alpha</span>: <span class="lifetime">&#39;a</span>&gt;(
+            </span><span class="kw">pub fn </span>set_alpha_map&lt;<span class="lifetime">'alpha</span>: <span class="lifetime">'a</span>&gt;(
                 <span class="self">self</span>,
-                alpha_map: <span class="kw-2">&amp;</span><span class="lifetime">&#39;alpha </span><span class="kw">crate</span>::Image&lt;<span class="lifetime">&#39;_</span>, <span class="lifetime">&#39;static</span>&gt;,
+                alpha_map: <span class="kw-2">&amp;</span><span class="lifetime">'alpha </span><span class="kw">crate</span>::Image&lt;<span class="lifetime">'_</span>, <span class="lifetime">'static</span>&gt;,
                 x: i16,
                 y: i16,
-            ) -&gt; <span class="macro-nonterminal">$name</span>&lt;<span class="lifetime">&#39;alpha</span>&gt; {
+            ) -&gt; <span class="macro-nonterminal">$name</span>&lt;<span class="lifetime">'alpha</span>&gt; {
+                <span class="attr">#[cfg(feature = <span class="string">"sync"</span>)]
+                </span><span class="kw">let </span>_lock = <span class="macro-nonterminal">$crate::REF_COUNT_LOCK</span>.lock().unwrap();
                 <span class="kw">unsafe </span>{
                     <span class="macro-nonterminal">$crate::ffi::pixman_image_set_alpha_map</span>(
                         <span class="self">self</span>.as_ptr(),
@@ -462,7 +484,9 @@
             }
 
             <span class="doccomment">/// Clear a previously set alpha map
-            </span><span class="kw">pub fn </span>clear_alpha_map(<span class="self">self</span>) -&gt; <span class="macro-nonterminal">$name</span>&lt;<span class="lifetime">&#39;static</span>&gt; {
+            </span><span class="kw">pub fn </span>clear_alpha_map(<span class="self">self</span>) -&gt; <span class="macro-nonterminal">$name</span>&lt;<span class="lifetime">'static</span>&gt; {
+                <span class="attr">#[cfg(feature = <span class="string">"sync"</span>)]
+                </span><span class="kw">let </span>_lock = <span class="macro-nonterminal">$crate::REF_COUNT_LOCK</span>.lock().unwrap();
                 <span class="kw">unsafe </span>{
                     <span class="macro-nonterminal">$crate::ffi::pixman_image_set_alpha_map</span>(
                         <span class="self">self</span>.as_ptr(),
@@ -478,7 +502,7 @@
             }
         }
 
-        <span class="kw">impl</span>&lt;<span class="lifetime">&#39;alpha</span>&gt; <span class="macro-nonterminal">$name</span>&lt;<span class="lifetime">&#39;alpha</span>&gt; {
+        <span class="kw">impl</span>&lt;<span class="lifetime">'alpha</span>&gt; <span class="macro-nonterminal">$name</span>&lt;<span class="lifetime">'alpha</span>&gt; {
             <span class="doccomment">/// Initialize the image from a raw pointer
             ///
             /// # Safety
@@ -493,11 +517,17 @@
             }
         }
 
-        <span class="kw">impl</span>&lt;<span class="lifetime">&#39;alpha</span>&gt; std::ops::Deref <span class="kw">for </span><span class="macro-nonterminal">$name</span>&lt;<span class="lifetime">&#39;alpha</span>&gt; {
+        <span class="kw">impl</span>&lt;<span class="lifetime">'alpha</span>&gt; std::ops::Deref <span class="kw">for </span><span class="macro-nonterminal">$name</span>&lt;<span class="lifetime">'alpha</span>&gt; {
             <span class="kw">type </span>Target = <span class="macro-nonterminal">$crate::ImageRef</span>;
 
             <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Target {
                 <span class="kw-2">&amp;</span><span class="self">self</span>.image
+            }
+        }
+
+        <span class="kw">impl</span>&lt;<span class="lifetime">'alpha</span>&gt; std::ops::DerefMut <span class="kw">for </span><span class="macro-nonterminal">$name</span>&lt;<span class="lifetime">'alpha</span>&gt; {
+            <span class="kw">fn </span>deref_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>::Target {
+                <span class="kw-2">&amp;mut </span><span class="self">self</span>.image
             }
         }
     };
