@@ -64,7 +64,7 @@ pub fn main() {
         (0, 0),
         (0, 0),
         (0, 0),
-        ((10 * WIDTH) as u16, HEIGHT as u16),
+        ((10 * WIDTH) as i32, HEIGHT as i32),
     );
 
     let src_img = src_img.set_alpha_map(&alpha_img, 10, 10);
@@ -76,7 +76,7 @@ pub fn main() {
         (0, 0),
         (0, 0),
         (0, 0),
-        ((10 * WIDTH) as u16, HEIGHT as u16),
+        ((10 * WIDTH) as i32, HEIGHT as i32),
     );
 
     let mut out_img = Image::new(
@@ -93,7 +93,7 @@ pub fn main() {
         (0, 0),
         (0, 0),
         (0, 0),
-        (dest_img.width() as u16, dest_img.height() as u16),
+        (dest_img.width() as i32, dest_img.height() as i32),
     );
 
     let image_buffer = image::ImageBuffer::<image::Rgba<u8>, _>::from_raw(

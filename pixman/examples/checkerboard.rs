@@ -36,8 +36,8 @@ pub fn main() {
                 None,
                 (0, 0),
                 (0, 0),
-                ((j * TILE_SIZE) as i16, (i * TILE_SIZE) as i16),
-                (TILE_SIZE as u16, TILE_SIZE as u16),
+                ((j * TILE_SIZE) as i32, (i * TILE_SIZE) as i32),
+                (TILE_SIZE as i32, TILE_SIZE as i32),
             );
         }
     }
@@ -54,7 +54,7 @@ pub fn main() {
         (0, 0),
         (0, 0),
         (0, 0),
-        (WIDTH as u16, HEIGHT as u16),
+        (WIDTH as i32, HEIGHT as i32),
     );
 
     let mut out_img = Image::new(
@@ -71,7 +71,7 @@ pub fn main() {
         (0, 0),
         (0, 0),
         (0, 0),
-        (destination.width() as u16, destination.height() as u16),
+        (destination.width() as i32, destination.height() as i32),
     );
 
     let image_buffer = image::ImageBuffer::<image::Rgba<u8>, _>::from_raw(
