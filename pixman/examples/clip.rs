@@ -39,7 +39,7 @@ pub fn main() {
         (0, 0),
         (0, 0),
         (0, 0),
-        (WIDTH as u16, HEIGHT as u16),
+        (WIDTH as i32, HEIGHT as i32),
     );
 
     let clip_region = Region32::init_rect(50, 0, 100, 200);
@@ -67,7 +67,7 @@ pub fn main() {
         (0, 0),
         (0, 0),
         (0, 0),
-        (WIDTH as u16, HEIGHT as u16),
+        (WIDTH as i32, HEIGHT as i32),
     );
 
     let mut out_img = Image::new(
@@ -84,7 +84,7 @@ pub fn main() {
         (0, 0),
         (0, 0),
         (0, 0),
-        (dst_img.width() as u16, dst_img.height() as u16),
+        (dst_img.width() as i32, dst_img.height() as i32),
     );
 
     let image_buffer = image::ImageBuffer::<image::Rgba<u8>, _>::from_raw(
