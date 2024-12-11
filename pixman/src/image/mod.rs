@@ -28,6 +28,12 @@ pub struct CreateFailed;
 #[derive(Debug)]
 pub struct ImageRef(*mut ffi::pixman_image_t);
 
+// SAFETY: See `Image`.
+#[cfg(feature = "sync")]
+unsafe impl Send for ImageRef {}
+#[cfg(feature = "sync")]
+unsafe impl Sync for ImageRef {}
+
 impl ImageRef {
     /// Set the repeat operation for this image
     pub fn set_repeat(&mut self, repeat: Repeat) {
