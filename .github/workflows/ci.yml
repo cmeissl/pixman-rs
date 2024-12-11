@@ -120,6 +120,7 @@ jobs:
         - ''
         - default
         - drm-fourcc
+        - sync
 
     env:
       RUSTFLAGS: "-D warnings"

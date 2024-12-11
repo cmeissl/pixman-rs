@@ -163,3 +163,20 @@ pub fn sample_ceil_y(y: impl Into<Fixed>, bpp: i32) -> Fixed {
 pub fn sample_floor_y(y: impl Into<Fixed>, bpp: i32) -> Fixed {
     Fixed::from_raw(unsafe { ffi::pixman_sample_floor_y(y.into().into_raw(), bpp) })
 }
+
+#[cfg(all(test, feature = "sync"))]
+mod test {
+    use super::*;
+
+    fn is_send_and_sync<T: Send + Sync>() {}
+
+    #[test]
+    fn test_send_sync() {
+        is_send_and_sync::<Image<'static, 'static>>();
+        is_send_and_sync::<ImageRef>();
+        is_send_and_sync::<LinearGradient>();
+        is_send_and_sync::<RadialGradient>();
+        is_send_and_sync::<ConicalGradient>();
+        is_send_and_sync::<Solid>();
+    }
+}
