@@ -266,7 +266,13 @@
 <a href="#265" id="265">265</a>
 <a href="#266" id="266">266</a>
 <a href="#267" id="267">267</a>
-<a href="#268" id="268">268</a></pre></div><pre class="rust"><code><span class="kw">use </span>std::os::raw::c_int;
+<a href="#268" id="268">268</a>
+<a href="#269" id="269">269</a>
+<a href="#270" id="270">270</a>
+<a href="#271" id="271">271</a>
+<a href="#272" id="272">272</a>
+<a href="#273" id="273">273</a>
+<a href="#274" id="274">274</a></pre></div><pre class="rust"><code><span class="kw">use </span>std::os::raw::c_int;
 
 <span class="kw">use </span>pixman_sys <span class="kw">as </span>ffi;
 <span class="kw">use </span>thiserror::Error;
@@ -295,6 +301,12 @@
 <span class="doccomment">/// A reference to a raw image
 </span><span class="attr">#[derive(Debug)]
 </span><span class="kw">pub struct </span>ImageRef(<span class="kw-2">*mut </span>ffi::pixman_image_t);
+
+<span class="comment">// SAFETY: See `Image`.
+</span><span class="attr">#[cfg(feature = <span class="string">"sync"</span>)]
+</span><span class="kw">unsafe impl </span>Send <span class="kw">for </span>ImageRef {}
+<span class="attr">#[cfg(feature = <span class="string">"sync"</span>)]
+</span><span class="kw">unsafe impl </span>Sync <span class="kw">for </span>ImageRef {}
 
 <span class="kw">impl </span>ImageRef {
     <span class="doccomment">/// Set the repeat operation for this image

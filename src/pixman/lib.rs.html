@@ -163,7 +163,24 @@
 <a href="#162" id="162">162</a>
 <a href="#163" id="163">163</a>
 <a href="#164" id="164">164</a>
-<a href="#165" id="165">165</a></pre></div><pre class="rust"><code><span class="attr">#![cfg_attr(docsrs, feature(doc_auto_cfg))]
+<a href="#165" id="165">165</a>
+<a href="#166" id="166">166</a>
+<a href="#167" id="167">167</a>
+<a href="#168" id="168">168</a>
+<a href="#169" id="169">169</a>
+<a href="#170" id="170">170</a>
+<a href="#171" id="171">171</a>
+<a href="#172" id="172">172</a>
+<a href="#173" id="173">173</a>
+<a href="#174" id="174">174</a>
+<a href="#175" id="175">175</a>
+<a href="#176" id="176">176</a>
+<a href="#177" id="177">177</a>
+<a href="#178" id="178">178</a>
+<a href="#179" id="179">179</a>
+<a href="#180" id="180">180</a>
+<a href="#181" id="181">181</a>
+<a href="#182" id="182">182</a></pre></div><pre class="rust"><code><span class="attr">#![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![warn(missing_docs, missing_debug_implementations)]
 </span><span class="doccomment">//! # From the official [pixman docs](https://www.pixman.org/):
 //!
@@ -327,5 +344,22 @@
 /// grid row.
 </span><span class="kw">pub fn </span>sample_floor_y(y: <span class="kw">impl </span>Into&lt;Fixed&gt;, bpp: i32) -&gt; Fixed {
     Fixed::from_raw(<span class="kw">unsafe </span>{ ffi::pixman_sample_floor_y(y.into().into_raw(), bpp) })
+}
+
+<span class="attr">#[cfg(all(test, feature = <span class="string">"sync"</span>))]
+</span><span class="kw">mod </span>test {
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
+
+    <span class="kw">fn </span>is_send_and_sync&lt;T: Send + Sync&gt;() {}
+
+    <span class="attr">#[test]
+    </span><span class="kw">fn </span>test_send_sync() {
+        is_send_and_sync::&lt;Image&lt;<span class="lifetime">'static</span>, <span class="lifetime">'static</span>&gt;&gt;();
+        is_send_and_sync::&lt;ImageRef&gt;();
+        is_send_and_sync::&lt;LinearGradient&gt;();
+        is_send_and_sync::&lt;RadialGradient&gt;();
+        is_send_and_sync::&lt;ConicalGradient&gt;();
+        is_send_and_sync::&lt;Solid&gt;();
+    }
 }
 </code></pre></div></section></main></body></html>
