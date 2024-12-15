@@ -270,42 +270,6 @@ impl Image<'_, '_> {
         operation: Operation,
         src: &ImageRef,
         mask: Option<&ImageRef>,
-        src_loc: (i16, i16),
-        mask_loc: (i16, i16),
-        dest_loc: (i16, i16),
-        size: (u16, u16),
-    ) {
-        let mask_ptr = if let Some(mask) = mask {
-            mask.as_ptr()
-        } else {
-            std::ptr::null_mut()
-        };
-
-        unsafe {
-            ffi::pixman_image_composite(
-                operation.into(),
-                src.as_ptr(),
-                mask_ptr,
-                self.as_ptr(),
-                src_loc.0,
-                src_loc.1,
-                mask_loc.0,
-                mask_loc.1,
-                dest_loc.0,
-                dest_loc.1,
-                size.0,
-                size.1,
-            )
-        }
-    }
-
-    /// Composite the specified src image into this image
-    #[allow(clippy::too_many_arguments)]
-    pub fn composite32(
-        &mut self,
-        operation: Operation,
-        src: &ImageRef,
-        mask: Option<&ImageRef>,
         src_loc: (i32, i32),
         mask_loc: (i32, i32),
         dest_loc: (i32, i32),

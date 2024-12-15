@@ -52,7 +52,7 @@ pub fn main() {
         (0, 0),
         (0, 0),
         (0, 0),
-        (dest_img.width() as u16, dest_img.height() as u16),
+        (dest_img.width() as i32, dest_img.height() as i32),
     );
 
     let image_buffer = image::ImageBuffer::<image::Rgba<u8>, _>::from_raw(

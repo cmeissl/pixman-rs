@@ -30,7 +30,7 @@ pub fn main() {
         src_img.set_repeat(Repeat::Normal);
         src_img.set_transform(transform).unwrap();
 
-        dest_img.composite32(
+        dest_img.composite(
             Operation::Over,
             &src_img,
             None,
@@ -55,7 +55,7 @@ pub fn main() {
         (0, 0),
         (0, 0),
         (0, 0),
-        (dest_img.width() as u16, dest_img.height() as u16),
+        (dest_img.width() as i32, dest_img.height() as i32),
     );
 
     let image_buffer = image::ImageBuffer::<image::Rgba<u8>, _>::from_raw(
@@ -100,7 +100,7 @@ fn draw_checkerboard(image: &mut Image<'_, '_>, check_size: usize, color1: u32, 
         for i in 0..n_checks_x {
             let src = if ((i ^ j) & 1) == 1 { &c1 } else { &c2 };
 
-            image.composite32(
+            image.composite(
                 Operation::Src,
                 src,
                 None,
